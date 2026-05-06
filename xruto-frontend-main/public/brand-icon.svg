@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#0D1B3E"/>
+      <stop offset="100%" stop-color="#020812"/>
+    </radialGradient>
+
+    <!-- Primary cyan glow -->
+    <radialGradient id="nodeGlow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00F5FF" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#00C9FF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0080FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Violet glow -->
+    <radialGradient id="nodeGlow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#BF5FFF" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#7B2FFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#3D00CC" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Route line gradient -->
+    <linearGradient id="routeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5FF"/>
+      <stop offset="50%" stop-color="#00AAFF"/>
+      <stop offset="100%" stop-color="#BF5FFF"/>
+    </linearGradient>
+
+    <linearGradient id="routeGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BF5FFF"/>
+      <stop offset="100%" stop-color="#00F5FF"/>
+    </linearGradient>
+
+    <!-- Arrow gradient -->
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F5FF"/>
+      <stop offset="100%" stop-color="#7BFFD4"/>
+    </linearGradient>
+
+    <!-- Outer ring gradient -->
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5FF" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#7B2FFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00F5FF" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Glow filters -->
+    <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowViolet" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowSoft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowStrong" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="30" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Glassmorphism clip -->
+    <clipPath id="roundedClip">
+      <rect x="0" y="0" width="1024" height="1024" rx="230" ry="230"/>
+    </clipPath>
+  </defs>
+
+  <!-- Base rounded background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="230" ry="230" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid texture overlay -->
+  <g clip-path="url(#roundedClip)" opacity="0.06">
+    <line x1="0" y1="128" x2="1024" y2="128" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="0" y1="256" x2="1024" y2="256" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="0" y1="384" x2="1024" y2="384" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="0" y1="512" x2="1024" y2="512" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="0" y1="640" x2="1024" y2="640" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="0" y1="768" x2="1024" y2="768" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="0" y1="896" x2="1024" y2="896" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="128" y1="0" x2="128" y2="1024" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="256" y1="0" x2="256" y2="1024" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="384" y1="0" x2="384" y2="1024" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="512" y1="0" x2="512" y2="1024" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="640" y1="0" x2="640" y2="1024" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="768" y1="0" x2="768" y2="1024" stroke="#00F5FF" stroke-width="1"/>
+    <line x1="896" y1="0" x2="896" y2="1024" stroke="#00F5FF" stroke-width="1"/>
+  </g>
+
+  <!-- Ambient glow circles in background -->
+  <circle cx="300" cy="350" r="180" fill="#00C9FF" opacity="0.04" filter="url(#glowStrong)"/>
+  <circle cx="720" cy="680" r="200" fill="#7B2FFF" opacity="0.05" filter="url(#glowStrong)"/>
+
+  <!-- ======= ROUTE PATH LINES ======= -->
+  <!-- Main optimized route: node A → B → C with elegant curves -->
+  <path d="M 230 680 Q 280 500 512 512 Q 740 524 794 340"
+        fill="none" stroke="url(#routeGrad1)" stroke-width="12"
+        stroke-linecap="round" opacity="0.9" filter="url(#glowCyan)"/>
+
+  <!-- Secondary dashed alt-route (faded) -->
+  <path d="M 230 680 Q 320 720 512 680 Q 700 640 794 340"
+        fill="none" stroke="#00F5FF" stroke-width="4"
+        stroke-linecap="round" stroke-dasharray="20 18"
+        opacity="0.25"/>
+
+  <!-- Tertiary subtle line -->
+  <path d="M 230 680 Q 400 580 512 512"
+        fill="none" stroke="#BF5FFF" stroke-width="3"
+        stroke-linecap="round" stroke-dasharray="10 14"
+        opacity="0.2"/>
+
+  <!-- ======= NODE A — Bottom Left (Start) ======= -->
+  <g filter="url(#glowSoft)">
+    <circle cx="230" cy="680" r="52" fill="#00F5FF" opacity="0.12"/>
+  </g>
+  <circle cx="230" cy="680" r="30" fill="#0A1628" stroke="url(#routeGrad1)" stroke-width="4"/>
+  <circle cx="230" cy="680" r="14" fill="url(#nodeGlow1)" filter="url(#glowCyan)"/>
+  <!-- Label dot -->
+  <circle cx="230" cy="680" r="6" fill="#FFFFFF" opacity="0.9"/>
+
+  <!-- ======= NODE B — Center (Waypoint) ======= -->
+  <g filter="url(#glowSoft)">
+    <circle cx="512" cy="512" r="64" fill="#00AAFF" opacity="0.10"/>
+  </g>
+  <circle cx="512" cy="512" r="36" fill="#0A1628" stroke="url(#routeGrad1)" stroke-width="5"/>
+  <circle cx="512" cy="512" r="18" fill="url(#nodeGlow1)" filter="url(#glowCyan)"/>
+  <circle cx="512" cy="512" r="7" fill="#FFFFFF" opacity="0.9"/>
+
+  <!-- ======= NODE C — Top Right (End / Destination) ======= -->
+  <g filter="url(#glowSoft)">
+    <circle cx="794" cy="340" r="80" fill="#BF5FFF" opacity="0.12"/>
+  </g>
+  <!-- Destination pin base -->
+  <circle cx="794" cy="340" r="46" fill="#0A1628" stroke="url(#routeGrad2)" stroke-width="5"/>
+  <circle cx="794" cy="340" r="28" fill="url(#nodeGlow2)" filter="url(#glowViolet)"/>
+  <!-- Checkmark inside destination node -->
+  <polyline points="782,340 791,350 810,328"
+            fill="none" stroke="#FFFFFF" stroke-width="5.5"
+            stroke-linecap="round" stroke-linejoin="round"
+            opacity="0.95"/>
+
+  <!-- ======= SPEED / DIRECTION ARROW ======= -->
+  <!-- Clean arrow on the main route path near center -->
+  <g transform="translate(440, 490) rotate(-12)">
+    <polygon points="0,0 38,0 38,12 52,6 38,-0.5 38,12"
+             fill="url(#arrowGrad)" opacity="0.0"/>
+    <!-- Better arrow -->
+    <line x1="0" y1="6" x2="42" y2="6" stroke="url(#arrowGrad)" stroke-width="5" stroke-linecap="round"/>
+    <polyline points="30,-6 44,6 30,18" fill="none" stroke="url(#arrowGrad)"
+              stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ======= OUTER DECORATIVE RING ======= -->
+  <circle cx="512" cy="512" r="440"
+          fill="none" stroke="url(#ringGrad)"
+          stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Corner accent dots -->
+  <circle cx="200" cy="200" r="5" fill="#00F5FF" opacity="0.3"/>
+  <circle cx="824" cy="200" r="5" fill="#BF5FFF" opacity="0.3"/>
+  <circle cx="200" cy="824" r="5" fill="#BF5FFF" opacity="0.2"/>
+  <circle cx="824" cy="824" r="5" fill="#00F5FF" opacity="0.2"/>
+
+  <!-- Small data point particles -->
+  <circle cx="350" cy="430" r="4" fill="#00F5FF" opacity="0.5"/>
+  <circle cx="660" cy="590" r="4" fill="#00F5FF" opacity="0.4"/>
+  <circle cx="420" cy="610" r="3" fill="#7BFFD4" opacity="0.4"/>
+  <circle cx="610" cy="420" r="3" fill="#7BFFD4" opacity="0.35"/>
+
+</svg>
