@@ -32,6 +32,10 @@ function loadAll() {
  * @param {object} data - { settings, depots, drivers, orders, routeOrders, orderStatuses }
  */
 function saveAll(data) {
+  // Vercel serverless functions have a read-only filesystem (except /tmp).
+  // We are using Supabase now, so we shouldn't attempt to write to db.json anyway.
+  if (process.env.VERCEL === '1') return;
+
   if (_saveTimer) clearTimeout(_saveTimer);
   _saveTimer = setTimeout(() => {
     try {
