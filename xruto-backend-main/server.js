@@ -3885,62 +3885,65 @@ app.use((error, req, res, next) => {
 });
 // Start server - MUST use 0.0.0.0 for Railway
 // Keep a reference to the HTTP server (listen errors, graceful shutdown, debugging "why did Node exit?")
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log('\n🚀 xRuto Standalone Server Started Successfully!');
-  console.log(`📍 Server running on http://0.0.0.0:${PORT}`);
-  console.log(`🔗 Health check: http://0.0.0.0:${PORT}/api/health`);
-  console.log(`🆔 PID ${process.pid} — keep this terminal open while the app runs. Press Ctrl+C to stop.`);
-  const sb = !!(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY);
-  console.log(`💾 Data: ${sb ? 'Supabase API (settings/depots/drivers) + local db.json (generated routes & sessions)' : 'Local db.json + memory only — add SUPABASE_URL + SUPABASE_ANON_KEY to match production'}`);
-  console.log(`🌐 CORS: CLIENT_URL=${process.env.CLIENT_URL || '(any localhost / *.vercel.app)'}  |  CORS_ALLOW_VERCEL=${String(process.env.CORS_ALLOW_VERCEL).toLowerCase() === 'false' ? 'false' : 'true'}`);
-  console.log('\n📋 Available endpoints:');
-  console.log('   GET  /api/health');
-  console.log('   GET  /api/admin/settings');
-  console.log('   PUT  /api/admin/settings');
-  console.log('   GET  /api/admin/depots');
-  console.log('   POST /api/admin/depots');
-  console.log('   GET  /api/admin/drivers');
-  console.log('   POST /api/admin/drivers');
-  console.log('   POST /api/orders/upload-pdf');
-  console.log('   POST /api/orders/upload-text');
-  console.log('   DELETE /api/orders/reset');
-  console.log('   POST /api/orders/test-pdf-parsing');
-  console.log('   GET  /api/orders/eligible');
-  console.log('   POST /api/orders/generate-clusters');
-  console.log('   POST /api/orders/generate-routes');
-  console.log('   GET  /api/orders/get-routes');
-  console.log('   GET  /api/orders/analytics-snapshot');
-  console.log('   POST /api/orders/assign-driver');
-  console.log('   POST /api/orders/dispatch-routes');
-  console.log('   GET /api/orders/available-drivers');
-  console.log('   GET  /api/orders/route-details/:routeId');
-  console.log('   PUT  /api/orders/delivery-status/:orderId');
-  console.log('   POST /api/auth/login');
-  console.log('\n✨ Your React frontend should now connect successfully!');
-  console.log('📊 Route-order tracking: Dynamic order management active\n');
-});
-
-server.on('error', (err) => {
-  if (err && err.code === 'EADDRINUSE') {
-    console.error(`\n❌ Port ${PORT} is already in use. Stop the other process or set PORT in .env\n`);
-  } else {
-    console.error('\n❌ HTTP server error:', err);
-  }
-  process.exit(1);
-});
-
-process.on('SIGINT', () => {
-  console.log('\nSIGINT — closing server…');
-  server.close(() => {
-    process.exit(0);
+let server;
+if (process.env.VERCEL !== '1') {
+  server = app.listen(PORT, '0.0.0.0', () => {
+    console.log('\n🚀 xRuto Standalone Server Started Successfully!');
+    console.log(`📍 Server running on http://0.0.0.0:${PORT}`);
+    console.log(`🔗 Health check: http://0.0.0.0:${PORT}/api/health`);
+    console.log(`🆔 PID ${process.pid} — keep this terminal open while the app runs. Press Ctrl+C to stop.`);
+    const sb = !!(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY);
+    console.log(`💾 Data: ${sb ? 'Supabase API (settings/depots/drivers) + local db.json (generated routes & sessions)' : 'Local db.json + memory only — add SUPABASE_URL + SUPABASE_ANON_KEY to match production'}`);
+    console.log(`🌐 CORS: CLIENT_URL=${process.env.CLIENT_URL || '(any localhost / *.vercel.app)'}  |  CORS_ALLOW_VERCEL=${String(process.env.CORS_ALLOW_VERCEL).toLowerCase() === 'false' ? 'false' : 'true'}`);
+    console.log('\n📋 Available endpoints:');
+    console.log('   GET  /api/health');
+    console.log('   GET  /api/admin/settings');
+    console.log('   PUT  /api/admin/settings');
+    console.log('   GET  /api/admin/depots');
+    console.log('   POST /api/admin/depots');
+    console.log('   GET  /api/admin/drivers');
+    console.log('   POST /api/admin/drivers');
+    console.log('   POST /api/orders/upload-pdf');
+    console.log('   POST /api/orders/upload-text');
+    console.log('   DELETE /api/orders/reset');
+    console.log('   POST /api/orders/test-pdf-parsing');
+    console.log('   GET  /api/orders/eligible');
+    console.log('   POST /api/orders/generate-clusters');
+    console.log('   POST /api/orders/generate-routes');
+    console.log('   GET  /api/orders/get-routes');
+    console.log('   GET  /api/orders/analytics-snapshot');
+    console.log('   POST /api/orders/assign-driver');
+    console.log('   POST /api/orders/dispatch-routes');
+    console.log('   GET /api/orders/available-drivers');
+    console.log('   GET  /api/orders/route-details/:routeId');
+    console.log('   PUT  /api/orders/delivery-status/:orderId');
+    console.log('   POST /api/auth/login');
+    console.log('\n✨ Your React frontend should now connect successfully!');
+    console.log('📊 Route-order tracking: Dynamic order management active\n');
   });
-});
 
-process.on('SIGTERM', () => {
-  server.close(() => {
-    process.exit(0);
+  server.on('error', (err) => {
+    if (err && err.code === 'EADDRINUSE') {
+      console.error(`\n❌ Port ${PORT} is already in use. Stop the other process or set PORT in .env\n`);
+    } else {
+      console.error('\n❌ HTTP server error:', err);
+    }
+    process.exit(1);
   });
-});
+
+  process.on('SIGINT', () => {
+    console.log('\nSIGINT — closing server…');
+    server.close(() => {
+      process.exit(0);
+    });
+  });
+
+  process.on('SIGTERM', () => {
+    server.close(() => {
+      process.exit(0);
+    });
+  });
+}
 
 module.exports = app;
-module.exports.server = server;
+if (server) module.exports.server = server;
