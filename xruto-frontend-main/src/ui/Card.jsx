@@ -6,9 +6,7 @@ export function Card({ as: Comp = 'section', variant = 'glass', className, child
     'rounded-card border transition-all duration-300 ease-out will-change-transform';
   const variants = {
     glass:
-      'glass-card border-white/10 ' +
-      'hover:-translate-y-[3px] hover:shadow-[0_16px_48px_rgba(0,0,0,0.65)] hover:border-white/[0.13] ' +
-      'shadow-panel ring-1 ring-inset ring-white/[0.04]',
+      'glass-card border-white/10 ring-1 ring-inset ring-white/[0.04]',
     solid:
       'bg-xr-surface border-xr-line ' +
       'hover:-translate-y-[2px] hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-white/10 ' +

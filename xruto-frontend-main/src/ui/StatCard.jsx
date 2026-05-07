@@ -5,7 +5,7 @@ import { cn } from './cn';
 export function StatCard({ icon, label, value, hint, trend, tone = 'neutral', className }) {
   const tones = {
     neutral: 'text-xr-text',
-    brand: 'text-amber-300',
+    brand: 'text-indigo-300',
     success: 'text-emerald-300',
     info: 'text-blue-300',
     danger: 'text-red-300',
@@ -13,7 +13,7 @@ export function StatCard({ icon, label, value, hint, trend, tone = 'neutral', cl
 
   const iconTones = {
     neutral: 'text-xr-secondary border-white/10 bg-white/[0.04]',
-    brand: 'text-amber-300 border-amber-500/20 bg-amber-500/10',
+    brand: 'text-indigo-300 border-indigo-500/20 bg-indigo-500/10',
     success: 'text-emerald-300 border-emerald-500/20 bg-emerald-500/10',
     info: 'text-blue-300 border-blue-500/20 bg-blue-500/10',
     danger: 'text-red-300 border-red-500/20 bg-red-500/10',
@@ -54,7 +54,7 @@ export function StatCard({ icon, label, value, hint, trend, tone = 'neutral', cl
       <div
         className={cn(
           'absolute bottom-0 left-4 right-4 h-[2px] rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100',
-          tone === 'brand' ? 'bg-amber-400/40' :
+          tone === 'brand' ? 'bg-indigo-400/40' :
           tone === 'success' ? 'bg-emerald-400/40' :
           tone === 'info' ? 'bg-blue-400/40' :
           tone === 'danger' ? 'bg-red-400/40' :

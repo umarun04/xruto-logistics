@@ -140,7 +140,7 @@ const LoginScreen = ({ onLogin }) => {
         <div className="flex flex-col items-center">
           <div className="mb-8 w-full text-center">
             <div className="inline-flex flex-col items-center animate-fade-up delay-100">
-              <div className="mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-card border border-white/10 shadow-[0_0_30px_rgba(245,158,11,0.2)] bg-gradient-to-b from-white/[0.08] to-transparent animate-glow-once">
+              <div className="mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-card border border-white/10 shadow-[0_0_30px_rgba(99,102,241,0.25)] bg-gradient-to-b from-white/[0.08] to-transparent animate-glow-once">
                 <BrandLogo className="h-12 w-12" alt="xRuto" />
               </div>
               <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">xRuto</h1>
@@ -695,7 +695,7 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
             <p className="text-sm text-xr-muted">Profile, password, and store connections.</p>
             <UiCard variant="glass" className="flex flex-col items-center px-6 py-8 text-center">
               <div className="text-[11px] font-medium uppercase tracking-[0.2em] text-xr-muted">Signed in</div>
-              <div className="mt-3 flex h-16 w-16 items-center justify-center rounded-card bg-gradient-to-br from-xr-brand to-amber-600 text-xl font-bold text-black shadow-lg shadow-xr-brand/25">
+              <div className="mt-3 flex h-16 w-16 items-center justify-center rounded-card bg-gradient-to-br from-xr-brand to-xr-info text-xl font-bold text-white shadow-lg shadow-xr-brand/25">
                 {initials}
               </div>
               <p className="mt-3 text-base font-semibold text-white">{user?.name || 'User'}</p>

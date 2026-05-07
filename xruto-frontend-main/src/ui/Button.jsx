@@ -28,9 +28,9 @@ export function Button({
 
   const variants = {
     primary:
-      'bg-gradient-to-b from-amber-400 to-[#D97706] text-black ' +
-      'hover:from-amber-300 hover:to-amber-500 hover:shadow-glow-brand ' +
-      'border border-amber-400/60 shadow-[0_2px_12px_rgba(245,158,11,0.25),inset_0_1px_0_rgba(255,255,255,0.2)]',
+      'bg-gradient-to-b from-xr-brand to-indigo-600 text-white ' +
+      'hover:from-indigo-400 hover:to-indigo-500 hover:shadow-glow-brand ' +
+      'border border-indigo-400/60 shadow-[0_2px_12px_rgba(99,102,241,0.25),inset_0_1px_0_rgba(255,255,255,0.2)]',
     secondary:
       'border border-white/10 bg-white/[0.04] text-xr-text ' +
       'hover:bg-white/[0.09] hover:border-white/20 hover:shadow-elevated-soft',

@@ -147,7 +147,7 @@ export function SlideToConfirm({
             'active:cursor-grabbing',
             confirmed
               ? 'bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-glow-success'
-              : 'bg-gradient-to-br from-amber-400 to-[#B45309] shadow-glow-brand',
+              : 'bg-gradient-to-br from-indigo-500 to-[#3730A3] shadow-glow-brand',
             'text-black border border-white/20',
             'transition-shadow duration-200',
             isDragging && 'scale-105'

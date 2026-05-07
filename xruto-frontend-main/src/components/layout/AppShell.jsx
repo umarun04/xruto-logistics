@@ -165,7 +165,7 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
                 collapsed && 'justify-center p-2'
               )}
             >
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-xr-brand/30 to-amber-700/30 ring-1 ring-xr-brand/25 text-[11px] font-bold text-amber-200">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-xr-brand/30 to-indigo-700/30 ring-1 ring-xr-brand/25 text-[11px] font-bold text-indigo-200">
                 {initials}
               </div>
               <div

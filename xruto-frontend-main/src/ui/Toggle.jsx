@@ -20,7 +20,7 @@ export function Toggle({ checked, onChange, disabled, className }) {
           checked && 'translate-x-5'
         )}
       />
-      {checked && <span aria-hidden className="absolute inset-0 rounded-full shadow-[0_0_0_4px_rgba(245,158,11,0.10)]" />}
+      {checked && <span aria-hidden className="absolute inset-0 rounded-full shadow-[0_0_0_4px_rgba(99,102,241,0.15)]" />}
     </button>
   );
 }

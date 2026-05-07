@@ -72,7 +72,7 @@ const ZoneCard = ({ route, index, onNavigate, onOrderNav, onOrderStatus }) => {
   const isInProgress = !isCompleted && (pct > 0 || inProgressByApi);
 
   const statusLabel = isCompleted ? 'Completed' : isInProgress ? 'In Progress' : 'Not Started';
-  const statusColor = isCompleted ? 'text-emerald-300 bg-xr-success/15' : isInProgress ? 'text-amber-200 bg-xr-brand/15' : 'text-red-300 bg-xr-danger/15';
+  const statusColor = isCompleted ? 'text-emerald-300 bg-xr-success/15' : isInProgress ? 'text-indigo-200 bg-xr-brand/15' : 'text-red-300 bg-xr-danger/15';
 
   return (
     <Card variant="glass" className="overflow-hidden border-l-2 border-l-xr-brand/35 animate-fade-up" style={{ animationDelay: `${index * 100}ms` }}>
@@ -90,7 +90,7 @@ const ZoneCard = ({ route, index, onNavigate, onOrderNav, onOrderStatus }) => {
         <div className="flex items-center gap-3 mb-4">
           <div className="flex-1 h-1.5 bg-xr-bg rounded-full overflow-hidden">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-xr-brand to-amber-500/90 transition-all duration-700"
+              className="h-full rounded-full bg-gradient-to-r from-xr-brand to-indigo-500/90 transition-all duration-700"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -373,10 +373,10 @@ const DriverRoutes = () => {
           <div className="bg-xr-panel border border-xr-line rounded-2xl p-4 mb-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-gray-300 font-medium">Today's Progress</span>
-              <span className="text-sm font-bold text-amber-200">{overallPct}%</span>
+              <span className="text-sm font-bold text-indigo-200">{overallPct}%</span>
             </div>
             <div className="h-2 bg-xr-bg rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-xr-brand to-amber-400 rounded-full transition-all duration-700" style={{ width: `${overallPct}%` }} />
+              <div className="h-full bg-gradient-to-r from-xr-brand to-indigo-400 rounded-full transition-all duration-700" style={{ width: `${overallPct}%` }} />
             </div>
             <p className="text-xs text-xr-subtle mt-2">{completedOrders} delivered &middot; {totalOrders - completedOrders} remaining</p>
           </div>

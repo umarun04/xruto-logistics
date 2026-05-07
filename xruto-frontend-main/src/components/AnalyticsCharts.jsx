@@ -197,7 +197,7 @@ export function AnalyticsCharts({ series, deliveryRate, snapshot }) {
                   y1={PAD.t}
                   x2={hover.x}
                   y2={PAD.t + PLOT.h}
-                  stroke="rgba(245,158,11,0.35)"
+                  stroke="rgba(99,102,241,0.35)"
                   strokeDasharray="4 4"
                 />
               </g>

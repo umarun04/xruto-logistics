@@ -1,8 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* ─────────────────────────────────────────
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";/* ─────────────────────────────────────────
    BASE
 ───────────────────────────────────────── */
 @layer base {
@@ -16,17 +14,17 @@
 
   body {
     /* bg-xr-bg text-body text-xr-text antialiased — expanded below */
-    background-color: #05080e;
+    background-color: #02040a;
     color: #f8fafc;
     font-size: clamp(0.875rem, 1.5vw, 0.9375rem);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background:
-      radial-gradient(1400px 900px at 15% 0%, rgba(245, 158, 11, 0.07), transparent 55%),
-      radial-gradient(900px 600px at 85% 15%, rgba(59, 130, 246, 0.05), transparent 55%),
-      radial-gradient(600px 400px at 50% 80%, rgba(16, 185, 129, 0.03), transparent 60%),
-      linear-gradient(180deg, #05080e, #020408 90%);
+      radial-gradient(1400px 900px at 15% 0%, rgba(99, 102, 241, 0.08), transparent 55%),
+      radial-gradient(900px 600px at 85% 15%, rgba(14, 165, 233, 0.05), transparent 55%),
+      radial-gradient(600px 400px at 50% 80%, rgba(244, 63, 94, 0.03), transparent 60%),
+      linear-gradient(180deg, #02040a, #010205 90%);
     background-attachment: fixed;
     min-height: 100dvh;
   }
@@ -36,7 +34,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid #f59e0b;
+    outline: 2px solid #6366f1;
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -52,11 +50,18 @@
 @layer components {
   /* Premium glassmorphism card */
   .glass-card {
-    background: linear-gradient(145deg, rgba(19, 27, 43, 0.72), rgba(11, 16, 26, 0.88));
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: linear-gradient(145deg, rgba(19, 24, 38, 0.72), rgba(11, 14, 23, 0.88));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border-color: rgba(99, 102, 241, 0.25);
   }
 
   /* Input base — no @apply, pure CSS */
@@ -81,8 +86,8 @@
 
   .input-base:focus {
     outline: none;
-    border-color: rgba(245, 158, 11, 0.4);
-    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
   }
 
   /* Select base */
@@ -109,8 +114,8 @@
 
   .select-base:focus {
     outline: none;
-    border-color: rgba(245, 158, 11, 0.4);
-    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
   }
 
   /* Gradient accent line */
@@ -119,7 +124,7 @@
     inset-inline: 0;
     top: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(245, 158, 11, 0.4), transparent);
+    background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.6), transparent);
   }
 
   /* Status badges */
@@ -211,7 +216,7 @@
 
   /* Text shimmer */
   .text-shimmer {
-    background: linear-gradient(90deg, #f59e0b 0%, #fde68a 40%, #f59e0b 60%, #d97706 100%);
+    background: linear-gradient(90deg, #6366f1 0%, #a8a2f8 40%, #6366f1 60%, #4f46e5 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -221,7 +226,7 @@
 
   /* Glow borders */
   .border-glow-brand {
-    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.3), 0 0 12px rgba(245, 158, 11, 0.1);
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3), 0 0 12px rgba(99, 102, 241, 0.1);
   }
 
   .border-glow-success {

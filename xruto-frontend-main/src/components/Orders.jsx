@@ -741,7 +741,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                           onClick={() => handlePostcodeToggle(pc)}
                           className={`rounded-xl border px-3 py-2 text-xs font-semibold transition animate-fade-up ${
                             sel
-                              ? 'border-orange-500/40 bg-orange-500/15 text-white shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                              ? 'border-indigo-500/40 bg-indigo-500/15 text-white shadow-[0_0_15px_rgba(99,102,241,0.2)]'
                               : 'border-xr-line bg-xr-elevated text-xr-secondary hover:border-orange-500/25 hover:text-xr-text'
                           }`}
                           style={{ animationDelay: `${Math.min(idx * 20, 500)}ms` }}
