@@ -876,7 +876,7 @@ app.post('/api/admin/drivers', async (req, res) => {
         };
         USERS.push(newUser);
         persist();
-        syncUserToDb(newUser); // Save permanently
+        await syncUserToDb(newUser); // Save permanently
         console.log(`Created login account for driver ${firstName} ${lastName} (${email})`);
       }
     }
@@ -3462,7 +3462,7 @@ app.post('/api/auth/register', requireAuth, requireRole('admin'), async (req, re
   };
   USERS.push(newUser);
   persist();
-  syncUserToDb(newUser); // Save permanently
+  await syncUserToDb(newUser); // Save permanently
   res.json({ success: true, message: 'User registered successfully', user: { id: newUser.id, email: newUser.email, name: newUser.name, role: newUser.role } });
 });
 
@@ -3532,7 +3532,7 @@ app.post('/api/auth/reset-password', async (req, res) => {
   delete user.password;
   passwordResetTokens.delete(token);
   persist();
-  syncUserToDb(user); // Save permanently
+  await syncUserToDb(user); // Save permanently
   console.log(`✅ Password reset successful for ${user.email}`);
   res.json({ success: true, message: 'Password has been reset successfully. You can now sign in.' });
 });
