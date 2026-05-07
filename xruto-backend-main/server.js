@@ -1296,18 +1296,66 @@ function getApproxPostcodeArea(lat, lng) {
  * @returns {Object} Zone descriptor with zone_id, zone_name, orders, center, distances, durations
  */
 const ZONE_COLORS = ['#FF6B35', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#90EE90', '#FFB6C1'];
+function sortOrdersNearestNeighbor(depotLat, depotLng, orders) {
+  if (!orders || orders.length === 0) return [];
+  if (orders.length === 1) return [...orders];
+
+  const unvisited = [...orders];
+  const sorted = [];
+  
+  let currentLat = depotLat;
+  let currentLng = depotLng;
+
+  while (unvisited.length > 0) {
+    let nearestIdx = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < unvisited.length; i++) {
+      const o = unvisited[i];
+      const d = haversineKm(currentLat, currentLng, parseFloat(o.latitude), parseFloat(o.longitude));
+      if (d < minDistance) {
+        minDistance = d;
+        nearestIdx = i;
+      }
+    }
+
+    const nextOrder = unvisited.splice(nearestIdx, 1)[0];
+    sorted.push(nextOrder);
+    currentLat = parseFloat(nextOrder.latitude);
+    currentLng = parseFloat(nextOrder.longitude);
+  }
+
+  return sorted;
+}
+
 function buildZone(i, orders) {
   const _pd = MOCK_DEPOTS.find(d => d.is_primary) || MOCK_DEPOTS[0] || { latitude: 0, longitude: 0 };
-  const DEPOT_LAT = _pd.latitude, DEPOT_LNG = _pd.longitude;
+  const DEPOT_LAT = parseFloat(_pd.latitude) || 0, DEPOT_LNG = parseFloat(_pd.longitude) || 0;
   const DEPOT_CAPACITY = 25;
 
-  const totalMeals = orders.reduce((s, o) => s + (parseInt(o.meal_qty) || parseFloat(o.weight) || 1), 0);
+  // Stage 2: Nearest Neighbor Sorting
+  const sortedOrders = sortOrdersNearestNeighbor(DEPOT_LAT, DEPOT_LNG, orders);
+
+  const totalMeals = sortedOrders.reduce((s, o) => s + (parseInt(o.meal_qty) || parseFloat(o.weight) || 1), 0);
   const depotReturns = Math.max(0, Math.ceil(totalMeals / DEPOT_CAPACITY) - 1);
 
-  const centLat = orders.reduce((s, o) => s + parseFloat(o.latitude), 0) / orders.length;
-  const centLng = orders.reduce((s, o) => s + parseFloat(o.longitude), 0) / orders.length;
+  const centLat = sortedOrders.reduce((s, o) => s + parseFloat(o.latitude), 0) / sortedOrders.length;
+  const centLng = sortedOrders.reduce((s, o) => s + parseFloat(o.longitude), 0) / sortedOrders.length;
   const distFromDepot = haversineKm(centLat, centLng, DEPOT_LAT, DEPOT_LNG);
-  const routeDistKm = orders.length * 0.8 + distFromDepot * 2;
+  
+  // Calculate true Nearest Neighbor TSP distance (with 30% road network penalty)
+  let exactDistKm = haversineKm(DEPOT_LAT, DEPOT_LNG, parseFloat(sortedOrders[0].latitude), parseFloat(sortedOrders[0].longitude));
+  for (let j = 0; j < sortedOrders.length - 1; j++) {
+    exactDistKm += haversineKm(
+      parseFloat(sortedOrders[j].latitude), parseFloat(sortedOrders[j].longitude),
+      parseFloat(sortedOrders[j+1].latitude), parseFloat(sortedOrders[j+1].longitude)
+    );
+  }
+  exactDistKm += haversineKm(
+    parseFloat(sortedOrders[sortedOrders.length - 1].latitude), parseFloat(sortedOrders[sortedOrders.length - 1].longitude),
+    DEPOT_LAT, DEPOT_LNG
+  );
+  const routeDistKm = exactDistKm * 1.3;
   const durationMins = 20 + orders.length * 8 + depotReturns * 30;
 
   // Find the most common postcode area in this cluster
@@ -1322,11 +1370,11 @@ function buildZone(i, orders) {
   return {
     zone_id: `zone_${i + 1}`,
     zone_name: `Zone ${i + 1} - ${dominantPC}`,
-    orders,
+    orders: sortedOrders,
     center: { lat: centLat, lng: centLng },
     color_hex: ZONE_COLORS[i % ZONE_COLORS.length],
-    total_orders: orders.length,
-    total_value: parseFloat(orders.reduce((s, o) => s + (o.order_value || 0), 0).toFixed(2)),
+    total_orders: sortedOrders.length,
+    total_value: parseFloat(sortedOrders.reduce((s, o) => s + (o.order_value || 0), 0).toFixed(2)),
     total_weight_kg: parseFloat(totalMeals.toFixed(1)),
     avg_distance_from_depot: parseFloat(distFromDepot.toFixed(2)),
     route_distance_km: parseFloat(routeDistKm.toFixed(1)),
