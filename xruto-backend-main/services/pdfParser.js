@@ -1,4 +1,3 @@
-const pdf = require('pdf-parse');
 const axios = require('axios');
 
 class PDFParserService {
@@ -13,6 +12,10 @@ class PDFParserService {
      */
     async parsePDF(pdfBuffer) {
         try {
+            // Use dynamic import to load the ESM version of pdf-parse,
+            // avoiding the ERR_REQUIRE_ESM crash with pdfjs-dist
+            const pdfParseModule = await import('pdf-parse');
+            const pdf = pdfParseModule.default || pdfParseModule;
             const data = await pdf(pdfBuffer);
             const text = data.text;
             
