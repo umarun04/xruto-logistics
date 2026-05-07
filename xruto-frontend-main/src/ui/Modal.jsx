@@ -28,7 +28,7 @@ export function Modal({ open, title, description, children, onClose, className }
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center px-4 sm:px-6">
+    <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center px-4 sm:px-6">
       {/* Backdrop */}
       <button
         type="button"
@@ -50,6 +50,7 @@ export function Modal({ open, title, description, children, onClose, className }
           'ring-1 ring-inset ring-white/[0.05]',
           'animate-slide-up-fade',
           'focus:outline-none',
+          'max-h-[90dvh] overflow-y-auto flex flex-col',
           // Full-width sheet on mobile, centered modal on sm+
           'mb-0 sm:mb-0 rounded-b-none rounded-t-[20px] sm:rounded-card',
           className

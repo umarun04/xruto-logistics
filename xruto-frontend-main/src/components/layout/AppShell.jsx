@@ -273,10 +273,12 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
               >
                 {/* Active top indicator */}
                 {active && (
-                  <span
-                    aria-hidden
-                    className="absolute -top-px left-1/2 h-[3px] w-8 -translate-x-1/2 rounded-full bg-xr-brand shadow-glow animate-expand-x"
-                  />
+                  <div className="absolute -top-px left-0 right-0 flex justify-center">
+                    <span
+                      aria-hidden
+                      className="h-[3px] w-8 rounded-full bg-xr-brand shadow-glow animate-expand-x"
+                    />
+                  </div>
                 )}
 
                 <div className={cn(
