@@ -865,15 +865,18 @@ app.post('/api/admin/drivers', async (req, res) => {
     if (password) {
       const existingUser = USERS.find(u => u.email === email.toLowerCase().trim());
       if (!existingUser) {
-        USERS.push({
+        const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+        const newUser = {
           id: `driver-${Date.now()}`,
           email: email.toLowerCase().trim(),
-          password,
+          passwordHash,
           name: `${firstName.trim()} ${lastName.trim()}`,
           role: 'driver',
           avatar: null
-        });
+        };
+        USERS.push(newUser);
         persist();
+        syncUserToDb(newUser); // Save permanently
         console.log(`Created login account for driver ${firstName} ${lastName} (${email})`);
       }
     }
@@ -3347,6 +3350,23 @@ for (const defaultUser of DEFAULT_USERS) {
   }
 }
 
+async function syncUserToDb(user) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) return;
+  try {
+    const { createClient } = require('@supabase/supabase-js');
+    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+    await supabase.from('users').upsert({
+      id: user.id,
+      email: user.email,
+      password_hash: user.passwordHash || null,
+      name: user.name,
+      role: user.role
+    }, { onConflict: 'email' });
+  } catch (err) {
+    console.error('Failed to sync user to Supabase:', err.message);
+  }
+}
+
 /**
  * Migrate any user that still has a plaintext `password` field.
  * Hashes it with bcrypt, stores as `passwordHash`, removes `password`.
@@ -3361,6 +3381,7 @@ async function migratePasswords() {
       changed = true;
       console.log(`[auth] Migrated password for ${user.email} to bcrypt hash`);
     }
+    await syncUserToDb(user);
   }
   if (changed) persist();
 }
@@ -3371,7 +3392,29 @@ app.post('/api/auth/login', async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ success: false, message: 'Email and password are required' });
   }
-  const user = USERS.find(u => u.email === email.toLowerCase().trim());
+  let user = USERS.find(u => u.email === email.toLowerCase().trim());
+  
+  // If not found in memory, try to load from Supabase database
+  if (!user && process.env.SUPABASE_URL) {
+    try {
+      const { createClient } = require('@supabase/supabase-js');
+      const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+      const { data } = await supabase.from('users').select('*').eq('email', email.toLowerCase().trim()).single();
+      if (data) {
+        user = {
+          id: data.id,
+          email: data.email,
+          passwordHash: data.password_hash,
+          name: data.name,
+          role: data.role
+        };
+        USERS.push(user); // Cache in memory
+      }
+    } catch (e) {
+      console.error('Supabase user fetch error:', e.message);
+    }
+  }
+
   if (!user) {
     return res.status(401).json({ success: false, message: 'Invalid email or password' });
   }
@@ -3418,6 +3461,7 @@ app.post('/api/auth/register', requireAuth, requireRole('admin'), async (req, re
   };
   USERS.push(newUser);
   persist();
+  syncUserToDb(newUser); // Save permanently
   res.json({ success: true, message: 'User registered successfully', user: { id: newUser.id, email: newUser.email, name: newUser.name, role: newUser.role } });
 });
 
@@ -3487,6 +3531,7 @@ app.post('/api/auth/reset-password', async (req, res) => {
   delete user.password;
   passwordResetTokens.delete(token);
   persist();
+  syncUserToDb(user); // Save permanently
   console.log(`✅ Password reset successful for ${user.email}`);
   res.json({ success: true, message: 'Password has been reset successfully. You can now sign in.' });
 });
