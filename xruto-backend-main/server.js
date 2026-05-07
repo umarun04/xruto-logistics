@@ -861,13 +861,15 @@ app.post('/api/admin/drivers', async (req, res) => {
       });
     }
 
+    let newDriverId = `driver-${Date.now()}`;
+
     // If password provided, create a login account for this driver
     if (password) {
       const existingUser = USERS.find(u => u.email === email.toLowerCase().trim());
       if (!existingUser) {
         const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
         const newUser = {
-          id: `driver-${Date.now()}`,
+          id: newDriverId,
           email: email.toLowerCase().trim(),
           passwordHash,
           name: `${firstName.trim()} ${lastName.trim()}`,
@@ -887,6 +889,7 @@ app.post('/api/admin/drivers', async (req, res) => {
         const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
         
         const driverData = {
+          id: newDriverId,
           first_name: firstName.trim(),
           last_name: lastName.trim(),
           email: email.trim(),
@@ -976,7 +979,7 @@ app.put('/api/admin/drivers/:id', async (req, res) => {
           vehicle_type: body.vehicleType ?? body.vehicle_type,
           vehicle_capacity: body.vehicleCapacity !== undefined ? parseInt(body.vehicleCapacity) : body.vehicle_capacity,
           license_plate: body.licensePlate ?? body.license_plate,
-          notes: body.notes,
+          details: body.notes,
           updated_at: new Date().toISOString()
         };
         const { data, error } = await supabase
@@ -3358,7 +3361,7 @@ async function syncUserToDb(user) {
     const { error } = await supabase.from('users').upsert({
       id: user.id,
       email: user.email,
-      password_hash: user.passwordHash || null,
+      passwordHash: user.passwordHash || null,
       name: user.name,
       role: user.role
     }, { onConflict: 'email' });
@@ -3405,7 +3408,7 @@ app.post('/api/auth/login', async (req, res) => {
         user = {
           id: data.id,
           email: data.email,
-          passwordHash: data.password_hash,
+          passwordHash: data.passwordHash || data.password_hash,
           name: data.name,
           role: data.role
         };
