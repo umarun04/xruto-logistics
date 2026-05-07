@@ -54,11 +54,22 @@ export function SlideToConfirm({
   }, [isDragging, dragX, getMaxX, onConfirm]);
 
   useEffect(() => {
+    let t;
     if (!loading) {
-      setConfirmed(false);
-      setDragX(0);
+      if (confirmed) {
+        // If confirmed but not loading, either validation failed instantly
+        // or the request just finished. Wait 800ms, then auto-reset.
+        t = setTimeout(() => {
+          setConfirmed(false);
+          setDragX(0);
+        }, 800);
+      } else {
+        setConfirmed(false);
+        setDragX(0);
+      }
     }
-  }, [loading]);
+    return () => clearTimeout(t);
+  }, [loading, confirmed]);
 
   useEffect(() => {
     if (!isDragging) return;
