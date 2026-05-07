@@ -3355,13 +3355,14 @@ async function syncUserToDb(user) {
   try {
     const { createClient } = require('@supabase/supabase-js');
     const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
-    await supabase.from('users').upsert({
+    const { error } = await supabase.from('users').upsert({
       id: user.id,
       email: user.email,
       password_hash: user.passwordHash || null,
       name: user.name,
       role: user.role
     }, { onConflict: 'email' });
+    if (error) console.error('Supabase upsert error:', error.message);
   } catch (err) {
     console.error('Failed to sync user to Supabase:', err.message);
   }
