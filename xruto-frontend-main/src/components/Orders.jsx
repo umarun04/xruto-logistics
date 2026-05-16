@@ -445,7 +445,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
         <div aria-hidden className="pointer-events-none absolute right-0 bottom-0 h-32 w-64 rounded-full bg-blue-500/5 blur-2xl" />
         <div className="relative">
           <div className="flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-xr-brand text-[10px] font-bold text-black">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-xr-brand text-[10px] font-bold text-white">
               {activeTab + 1}
             </span>
             <p className="text-caption font-semibold uppercase tracking-wider text-xr-brand">Step {activeTab + 1} of 4</p>
@@ -529,10 +529,10 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                         type="button"
                         onClick={() => setUploadMethod(m.id)}
                         className={`h-11 rounded-xl px-3 text-xs font-semibold transition-all duration-150 ${
-                          uploadMethod === m.id ? 'text-black' : 'text-xr-secondary hover:text-xr-text'
+                          uploadMethod === m.id ? 'text-white drop-shadow-sm' : 'text-xr-secondary hover:text-xr-text'
                         }`}
                       >
-                        <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-lg bg-black/10 text-[11px] font-bold">
+                        <span className={`mr-2 inline-flex h-6 w-6 items-center justify-center rounded-lg text-[11px] font-bold ${uploadMethod === m.id ? 'bg-white/20' : 'bg-black/10'}`}>
                           {m.icon}
                         </span>
                         {m.label}
