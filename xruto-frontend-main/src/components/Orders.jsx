@@ -112,10 +112,10 @@ const mapStartDepotLabel = (route) => {
 
 const SummaryTile = ({ label, value, tone = 'neutral' }) => {
   const valueCls =
-    tone === 'brand'   ? 'text-amber-300' :
-    tone === 'success' ? 'text-emerald-300' :
-    tone === 'info'    ? 'text-blue-300' :
-    tone === 'danger'  ? 'text-red-300'   : 'text-white';
+    tone === 'brand'   ? 'text-xr-warning' :
+    tone === 'success' ? 'text-xr-success' :
+    tone === 'info'    ? 'text-xr-info' :
+    tone === 'danger'  ? 'text-xr-danger'   : 'text-xr-text';
   const bgCls =
     tone === 'brand'   ? 'bg-amber-500/8 border-amber-500/20' :
     tone === 'success' ? 'bg-emerald-500/8 border-emerald-500/20' :
@@ -135,7 +135,7 @@ const Card = ({ title, subtitle, right, children, className = '', variant = 'gla
     {(title || subtitle || right) && (
       <CardHeader>
         <div className="min-w-0">
-          {title && <h3 className="text-sm font-semibold text-white">{title}</h3>}
+          {title && <h3 className="text-sm font-semibold text-xr-text">{title}</h3>}
           {subtitle && <p className="mt-1 text-xs text-xr-muted">{subtitle}</p>}
         </div>
         {right && <div className="shrink-0">{right}</div>}
@@ -407,8 +407,8 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                   onClick={() => setActiveTab(t.id)}
                   className={`flex items-center gap-2 whitespace-nowrap rounded-[8px] px-4 py-2 text-sm font-semibold transition-all duration-200 ${
                     active
-                      ? 'bg-white/[0.08] text-white shadow-inner-bright ring-1 ring-inset ring-xr-brand/25'
-                      : 'text-xr-secondary hover:text-white hover:bg-white/[0.04]'
+                      ? 'bg-xr-elevated text-xr-text shadow-inner-bright ring-1 ring-inset ring-xr-brand/25'
+                      : 'text-xr-secondary hover:text-xr-text hover:bg-xr-elevated'
                   }`}
                 >
                   <Icon className={`h-4 w-4 transition-colors ${ active ? 'text-xr-brand' : ''}`} />
@@ -450,7 +450,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
             </span>
             <p className="text-caption font-semibold uppercase tracking-wider text-xr-brand">Step {activeTab + 1} of 4</p>
           </div>
-          <h2 className="mt-2 font-heading text-2xl font-bold tracking-tight text-white sm:text-[1.6rem]">
+          <h2 className="mt-2 font-heading text-2xl font-bold tracking-tight text-xr-text sm:text-[1.6rem]">
             {pipelineHelp[activeTab].title}
           </h2>
           <p className="mt-1.5 max-w-readable text-sm text-xr-muted sm:text-body leading-relaxed">
@@ -463,7 +463,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
       <UiCard variant="glass" className="p-5 sm:p-6 animate-fade-up delay-100">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div>
-            <div className="font-heading text-sm font-semibold text-white">Today's snapshot</div>
+            <div className="font-heading text-sm font-semibold text-xr-text">Today's snapshot</div>
             <div className="mt-0.5 text-xs text-xr-muted">Orders → zones → routes → dispatch</div>
           </div>
         </div>
@@ -478,7 +478,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
       {loading && (
         <div className="flex items-center gap-3 rounded-control border border-xr-brand/20 bg-xr-brand/[0.06] px-4 py-3 animate-fade-in">
           <div className="h-4 w-4 shrink-0 rounded-full border-2 border-xr-brand/30 border-t-xr-brand animate-spin" />
-          <span className="text-sm font-medium text-amber-200">{loadingHint}</span>
+          <span className="text-sm font-medium text-xr-warning">{loadingHint}</span>
         </div>
       )}
 
@@ -529,7 +529,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                         type="button"
                         onClick={() => setUploadMethod(m.id)}
                         className={`h-11 rounded-xl px-3 text-xs font-semibold transition-all duration-150 ${
-                          uploadMethod === m.id ? 'text-black' : 'text-xr-secondary hover:text-white'
+                          uploadMethod === m.id ? 'text-black' : 'text-xr-secondary hover:text-xr-text'
                         }`}
                       >
                         <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-lg bg-black/10 text-[11px] font-bold">
@@ -541,7 +541,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                   </div>
                 </div>
 
-                  <div className="mt-4 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-4 text-xs text-xr-subtle transition duration-150 hover:border-xr-brand/25 hover:bg-xr-brand/[0.06]">
+                  <div className="mt-4 rounded-2xl border border-dashed border-xr-line bg-xr-elevated p-4 text-xs text-xr-subtle transition duration-150 hover:border-xr-brand/25 hover:bg-xr-brand/[0.06]">
                   Drop files here (PDF/Excel), then use the import panel below for your selected format.
                 </div>
             </Card>
@@ -551,7 +551,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
               {uploadMethod === 'pdf' && <PDFUpload onOrdersUploaded={handleOrdersUploaded} />}
               {uploadMethod === 'excel' && (
                 <Card title="Excel upload" subtitle=".xlsx / .xls — Order ID, Customer Name, Address, Lat, Lon, Meal Qty">
-                  <label className="block w-full cursor-pointer rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center transition duration-150 hover:border-xr-brand/30 hover:bg-xr-brand/[0.06]">
+                  <label className="block w-full cursor-pointer rounded-2xl border border-dashed border-xr-line bg-xr-elevated p-6 text-center transition duration-150 hover:border-xr-brand/30 hover:bg-xr-brand/[0.06]">
                     <span className="text-sm text-xr-secondary">{excelFile ? excelFile.name : 'Choose Excel file'}</span>
                     <input type="file" accept=".xlsx,.xls" className="hidden" onChange={e => { setExcelFile(e.target.files[0] || null); setExcelResult(null); }} />
                   </label>
@@ -575,7 +575,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                       }} />
                     </div>
                   )}
-                  {excelResult && <div className={`mt-3 rounded-2xl border p-3 text-xs ${excelResult.ok ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-200' : 'border-red-500/20 bg-red-500/10 text-red-200'}`}>{excelResult.msg}</div>}
+                  {excelResult && <div className={`mt-3 rounded-2xl border p-3 text-xs ${excelResult.ok ? 'border-emerald-500/20 bg-emerald-500/10 text-xr-success' : 'border-red-500/20 bg-red-500/10 text-xr-danger'}`}>{excelResult.msg}</div>}
                 </Card>
               )}
             </div>
@@ -585,7 +585,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
               subtitle="Load a dataset to explore clustering and routes."
               className="relative animate-fade-up"
             >
-              <div className="mb-3 rounded-xl border-l-4 border-xr-brand bg-xr-brand/[0.08] px-3 py-2 text-xs text-amber-200/90">
+              <div className="mb-3 rounded-xl border-l-4 border-xr-brand bg-xr-brand/[0.08] px-3 py-2 text-xs text-xr-warning">
                 ⚡ Great for showcasing the product — no PDF needed.
               </div>
               <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -596,7 +596,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                   { id:'usa', label:'USA', flag:'🇺🇸', count:5, desc:'New York City metro' },
                 ].map((d, idx) => (
                   <button key={d.id} type="button" onClick={() => setDemoSet(d.id)}
-                    className={`p-4 rounded-xl text-center transition-all duration-300 transform animate-fade-up ${demoSet === d.id ? 'bg-xr-brand/15 border-xr-brand text-white shadow-glow scale-[1.02]' : 'bg-xr-elevated/40 border-xr-line text-xr-secondary hover:border-xr-brand/40 hover:bg-xr-elevated hover:-translate-y-1'}`} style={{ animationDelay: `${idx * 50}ms` }}>
+                    className={`p-4 rounded-xl text-center transition-all duration-300 transform animate-fade-up ${demoSet === d.id ? 'bg-xr-brand/15 border-xr-brand text-xr-text shadow-glow scale-[1.02]' : 'bg-xr-elevated/40 border-xr-line text-xr-secondary hover:border-xr-brand/40 hover:bg-xr-elevated hover:-translate-y-1'}`} style={{ animationDelay: `${idx * 50}ms` }}>
                     <div className="text-3xl mb-2 filter drop-shadow-sm">{d.flag}</div>
                     <div className="text-body font-semibold">{d.label}</div>
                     <div className="text-[10px] text-xr-muted mt-1">{d.count} orders</div>
@@ -692,7 +692,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
               >
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="rounded-xl border border-xr-line bg-xr-elevated px-3 py-2.5">
-                    <label className="block text-[10px] font-medium uppercase tracking-wider text-xr-muted/70">Search</label>
+                    <label className="block text-[10px] font-medium uppercase tracking-wider text-xr-muted">Search</label>
                     <input
                       value={postcodeQuery}
                       onChange={(e) => setPostcodeQuery(e.target.value)}
@@ -701,7 +701,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                     />
                   </div>
                   <div className="rounded-xl border border-xr-line bg-xr-elevated px-3 py-2.5">
-                    <label className="block text-[10px] font-medium uppercase tracking-wider text-xr-muted/70">Max zones</label>
+                    <label className="block text-[10px] font-medium uppercase tracking-wider text-xr-muted">Max zones</label>
                     <div className="mt-2 flex items-center gap-3">
                       <input
                         type="range"
@@ -711,7 +711,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                         onChange={(e) => setMaxZones(parseInt(e.target.value, 10))}
                         className="h-2 w-full accent-orange-500"
                       />
-                      <span className="w-10 text-right text-sm font-semibold tabular-nums text-white">{maxZones}</span>
+                      <span className="w-10 text-right text-sm font-semibold tabular-nums text-xr-text">{maxZones}</span>
                     </div>
                   </div>
                 </div>
@@ -741,7 +741,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                           onClick={() => handlePostcodeToggle(pc)}
                           className={`rounded-xl border px-3 py-2 text-xs font-semibold transition animate-fade-up ${
                             sel
-                              ? 'border-indigo-500/40 bg-indigo-500/15 text-white shadow-[0_0_15px_rgba(99,102,241,0.2)]'
+                              ? 'border-indigo-500/40 bg-indigo-500/15 text-xr-text shadow-[0_0_15px_rgba(99,102,241,0.2)]'
                               : 'border-xr-line bg-xr-elevated text-xr-secondary hover:border-orange-500/25 hover:text-xr-text'
                           }`}
                           style={{ animationDelay: `${Math.min(idx * 20, 500)}ms` }}
@@ -765,9 +765,9 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex min-w-0 items-center gap-2">
                             <div className="h-3 w-3 rounded-full" style={{ backgroundColor: zone.color_hex || ZONE_COLORS[i % 5] }} />
-                            <span className="truncate text-sm font-semibold text-white">{zone.zone_name}</span>
+                            <span className="truncate text-sm font-semibold text-xr-text">{zone.zone_name}</span>
                           </div>
-                          <span className="shrink-0 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-xr-secondary">
+                          <span className="shrink-0 rounded-full bg-xr-elevated px-2.5 py-1 text-[10px] font-semibold text-xr-secondary">
                             {zone.total_orders} orders
                           </span>
                         </div>
@@ -784,7 +784,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
 
               <Card title="Actions" subtitle="Generate zones and routes">
                 <div className="space-y-3">
-                  <div className="rounded-xl border border-white/5 bg-xr-elevated/60 p-3 text-xs text-xr-muted">
+                  <div className="rounded-xl border border-xr-line bg-xr-elevated/60 p-3 text-xs text-xr-muted">
                     Select at least one area, then generate clusters. You can adjust max zones any time.
                   </div>
                   <SlideToConfirm
@@ -827,7 +827,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                 )}
               >
                 {generatedRoutes.length === 0 ? (
-                  <div className="rounded-card border border-dashed border-white/10 bg-xr-elevated/40 p-6 text-center text-sm text-xr-muted">
+                  <div className="rounded-card border border-dashed border-xr-line bg-xr-elevated/40 p-6 text-center text-sm text-xr-muted">
                     No routes yet. Generate routes from the Filter step.
                   </div>
                 ) : (
@@ -835,9 +835,9 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                     {generatedRoutes.map((route, i) => {
                       const isSelected = selectedRouteId === route.route_id;
                       const statusCls =
-                        route.status === 'assigned'   ? 'bg-blue-500/15 text-blue-300 border border-blue-500/20' :
-                        route.status === 'dispatched' ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/20' :
-                        'bg-white/[0.05] text-xr-secondary border border-white/8';
+                        route.status === 'assigned'   ? 'bg-blue-500/15 text-xr-info border border-blue-500/20' :
+                        route.status === 'dispatched' ? 'bg-emerald-500/15 text-xr-success border border-emerald-500/20' :
+                        'bg-xr-elevated text-xr-secondary border border-white/8';
                       return (
                         <button
                           key={route.route_id}
@@ -846,7 +846,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                           className={`group text-left rounded-card border p-4 transition-all duration-200 ${
                             isSelected
                               ? 'border-amber-500/40 bg-amber-500/[0.08] shadow-glow-brand'
-                              : 'border-xr-line bg-xr-elevated hover:border-white/15 hover:-translate-y-[2px] hover:shadow-elevated-soft'
+                              : 'border-xr-line bg-xr-elevated hover:border-xr-line hover:-translate-y-[2px] hover:shadow-elevated-soft'
                           }`}
                           style={{ animationDelay: `${i * 50}ms` }}
                         >
@@ -854,7 +854,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                             <div className="min-w-0">
                               <div className="flex items-center gap-2">
                                 <div className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: route.zone_color || ZONE_COLORS[i % 5] }} />
-                                <p className="truncate text-sm font-semibold text-white">{route.route_name}</p>
+                                <p className="truncate text-sm font-semibold text-xr-text">{route.route_name}</p>
                               </div>
                               <p className="mt-1.5 text-xs text-xr-muted">
                                 {route.total_orders} stops &middot; {route.total_distance_km?.toFixed(1)} km &middot; {fmtDur(route.estimated_duration_minutes)}
@@ -866,7 +866,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                           </div>
 
                           {route.depot_returns_count > 0 && (
-                            <div className="mt-3 rounded-control border border-amber-500/20 bg-amber-500/8 px-3 py-2 text-xs font-medium text-amber-300">
+                            <div className="mt-3 rounded-control border border-amber-500/20 bg-amber-500/8 px-3 py-2 text-xs font-medium text-xr-warning">
                               {route.depot_returns_count} depot return(s)
                             </div>
                           )}
@@ -878,7 +878,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                             </span>
                           </div>
                           {mapStartDepotLabel(route) && (
-                            <span className="mt-0.5 block text-[11px] text-xr-muted/70">
+                            <span className="mt-0.5 block text-[11px] text-xr-muted">
                               Map: {mapStartDepotLabel(route)}
                             </span>
                           )}
@@ -891,13 +891,13 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
 
               <Card title="Assignment" subtitle="Select a route to manage its driver.">
                 {!selectedRoute ? (
-                  <div className="rounded-card border border-dashed border-white/10 bg-xr-elevated/40 p-5 text-center text-sm text-xr-muted">
+                  <div className="rounded-card border border-dashed border-xr-line bg-xr-elevated/40 p-5 text-center text-sm text-xr-muted">
                     Tap a route card above to manage its driver.
                   </div>
                 ) : (
                   <div className="space-y-3 animate-slide-up-fade">
                     <div className="rounded-card border border-xr-brand/20 bg-xr-brand/[0.06] p-3.5">
-                      <p className="text-sm font-semibold text-white">{selectedRoute.route_name}</p>
+                      <p className="text-sm font-semibold text-xr-text">{selectedRoute.route_name}</p>
                       <p className="mt-1 text-xs text-xr-muted">
                         {selectedRoute.total_orders} stops &middot; {selectedRoute.total_distance_km?.toFixed(1)} km &middot; £{selectedRoute.estimated_fuel_cost}
                       </p>
@@ -932,7 +932,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                         href={selectedRoute.navigation_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 w-full rounded-card border border-amber-500/25 bg-amber-500/10 px-4 py-2.5 text-center text-sm font-semibold text-amber-200 transition hover:bg-amber-500/15 hover:border-amber-500/35"
+                        className="flex items-center justify-center gap-2 w-full rounded-card border border-amber-500/25 bg-amber-500/10 px-4 py-2.5 text-center text-sm font-semibold text-xr-warning transition hover:bg-amber-500/15 hover:border-amber-500/35"
                       >
                         Open route map
                       </a>
@@ -952,14 +952,14 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                   <SummaryTile label="Ready" value={generatedRoutes.length} tone="info" />
                   <SummaryTile label="Dispatched" value={dispatchedCount} tone="success" />
                 </div>
-                <div className="mt-4 rounded-xl border border-white/5 bg-xr-elevated/60 p-3 text-xs text-xr-muted">
+                <div className="mt-4 rounded-xl border border-xr-line bg-xr-elevated/60 p-3 text-xs text-xr-muted">
                   When you dispatch, each driver receives their assigned route.
                 </div>
                 <div className="mt-4">
                   {generatedRoutes.every(r => r.status === 'dispatched') ? (
                     <div className="rounded-xl border border-emerald-500/25 bg-emerald-500/10 p-4 text-center">
-                      <p className="text-sm font-semibold text-emerald-200">All routes dispatched</p>
-                      <p className="mt-0.5 text-xs text-emerald-200/70">Drivers have been notified.</p>
+                      <p className="text-sm font-semibold text-xr-success">All routes dispatched</p>
+                      <p className="mt-0.5 text-xs text-xr-success">Drivers have been notified.</p>
                     </div>
                   ) : (
                     <SlideToConfirm onConfirm={dispatchAllRoutes} loading={loading} label="Slide to dispatch all routes" loadingLabel="Dispatching…" />
@@ -969,21 +969,21 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
 
               <Card title="Routes" subtitle="Live status overview">
                 {generatedRoutes.length === 0 ? (
-                  <div className="rounded-xl border border-white/5 bg-xr-elevated/60 p-4 text-center text-sm text-xr-muted">
+                  <div className="rounded-xl border border-xr-line bg-xr-elevated/60 p-4 text-center text-sm text-xr-muted">
                     No routes ready. Confirm routes first.
                   </div>
                 ) : (
                   <div className="grid gap-3 sm:grid-cols-2">
                     {generatedRoutes.map((route, i) => {
                       const progress = route.progress_percentage || (route.status === 'dispatched' ? 100 : 0);
-                      const statusTone = route.status === 'dispatched' ? 'bg-emerald-500/15 text-emerald-300' : 'bg-blue-500/15 text-blue-300';
+                      const statusTone = route.status === 'dispatched' ? 'bg-emerald-500/15 text-xr-success' : 'bg-blue-500/15 text-xr-info';
                       return (
                         <div key={route.route_id} className="rounded-2xl border border-xr-line bg-xr-elevated p-4">
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
                               <div className="flex items-center gap-2">
                                 <div className="h-3 w-3 rounded-full" style={{ backgroundColor: route.zone_color || ZONE_COLORS[i % 5] }} />
-                                <p className="truncate text-sm font-semibold text-white">{route.route_name}</p>
+                                <p className="truncate text-sm font-semibold text-xr-text">{route.route_name}</p>
                               </div>
                               <p className="mt-1 text-xs text-xr-muted">Driver: <span className="text-xr-secondary">{route.driver_name || 'N/A'}</span> · {route.total_orders} stops</p>
                               {mapStartDepotLabel(route) && (
@@ -997,7 +997,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                           <div className="mt-3 h-2 rounded-full bg-black/40 overflow-hidden border border-xr-line/50">
                             <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all" style={{ width: `${progress}%` }} />
                           </div>
-                          <div className="mt-1 flex justify-between text-[11px] text-xr-muted/70">
+                          <div className="mt-1 flex justify-between text-[11px] text-xr-muted">
                             <span>{progress}%</span>
                             <span>{fmtDur(route.estimated_duration_minutes)}</span>
                           </div>
@@ -1029,20 +1029,20 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
                       type="button"
                       onClick={() => setActiveTab(t.id)}
                       className={`flex w-full items-start gap-3 rounded-control px-2 py-2 text-left transition-all duration-200 ${
-                        isActive ? 'bg-white/[0.06]' : 'hover:bg-white/[0.03]'
+                        isActive ? 'bg-xr-elevated' : 'hover:bg-xr-elevated'
                       }`}
                     >
                       <span
                         className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all ${
                           isActive ? 'bg-xr-brand text-black scale-110' :
-                          isDone  ? 'bg-emerald-500/25 text-emerald-300' :
-                          'bg-white/[0.06] text-xr-muted'
+                          isDone  ? 'bg-emerald-500/25 text-xr-success' :
+                          'bg-xr-elevated text-xr-muted'
                         }`}
                       >
                         {isDone ? '✓' : i + 1}
                       </span>
                       <div className="min-w-0 flex-1 pt-0.5">
-                        <p className={`text-sm font-semibold leading-none ${ isActive ? 'text-white' : isDone ? 'text-xr-secondary' : 'text-xr-muted'}`}>
+                        <p className={`text-sm font-semibold leading-none ${ isActive ? 'text-xr-text' : isDone ? 'text-xr-secondary' : 'text-xr-muted'}`}>
                           {t.label}
                         </p>
                         {isActive && (
@@ -1061,7 +1061,7 @@ const Orders = ({ onNavigateBack, onNavigateToRouteDetail }) => {
           {/* Tip card */}
           <UiCard variant="soft" className="p-4 sm:p-5">
             <div className="flex items-center gap-2 mb-2">
-              <Lightbulb className="h-4 w-4 text-amber-300/80" />
+              <Lightbulb className="h-4 w-4 text-xr-warning" />
               <span className="text-caption font-semibold uppercase tracking-wider text-xr-muted">Tip</span>
             </div>
             <p className="text-sm leading-relaxed text-xr-secondary">{pipelineTips[activeTab]}</p>

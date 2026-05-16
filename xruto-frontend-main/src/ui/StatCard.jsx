@@ -5,18 +5,18 @@ import { cn } from './cn';
 export function StatCard({ icon, label, value, hint, trend, tone = 'neutral', className }) {
   const tones = {
     neutral: 'text-xr-text',
-    brand: 'text-indigo-300',
-    success: 'text-emerald-300',
-    info: 'text-blue-300',
-    danger: 'text-red-300',
+    brand: 'text-xr-brandDark',
+    success: 'text-xr-success',
+    info: 'text-xr-info',
+    danger: 'text-xr-danger',
   };
 
   const iconTones = {
-    neutral: 'text-xr-secondary border-white/10 bg-white/[0.04]',
-    brand: 'text-indigo-300 border-indigo-500/20 bg-indigo-500/10',
-    success: 'text-emerald-300 border-emerald-500/20 bg-emerald-500/10',
-    info: 'text-blue-300 border-blue-500/20 bg-blue-500/10',
-    danger: 'text-red-300 border-red-500/20 bg-red-500/10',
+    neutral: 'text-xr-secondary border-xr-border bg-xr-elevated',
+    brand: 'text-xr-brand border-xr-brand/20 bg-xr-brand/10',
+    success: 'text-xr-success border-xr-success/20 bg-xr-success/10',
+    info: 'text-xr-info border-xr-info/20 bg-xr-info/10',
+    danger: 'text-xr-danger border-xr-danger/20 bg-xr-danger/10',
   };
 
   return (
@@ -40,7 +40,7 @@ export function StatCard({ icon, label, value, hint, trend, tone = 'neutral', cl
           </div>
         </div>
         {trend && (
-          <span className="rounded-full border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] font-semibold text-xr-secondary">
+          <span className="rounded-full border border-xr-line bg-xr-elevated px-2 py-1 text-[11px] font-semibold text-xr-secondary">
             {trend}
           </span>
         )}
@@ -58,7 +58,7 @@ export function StatCard({ icon, label, value, hint, trend, tone = 'neutral', cl
           tone === 'success' ? 'bg-emerald-400/40' :
           tone === 'info' ? 'bg-blue-400/40' :
           tone === 'danger' ? 'bg-red-400/40' :
-          'bg-white/10'
+          'bg-xr-elevated'
         )}
         aria-hidden
       />

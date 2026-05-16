@@ -28,20 +28,20 @@ export function Button({
 
   const variants = {
     primary:
-      'bg-gradient-to-b from-xr-brand to-indigo-600 text-white ' +
-      'hover:from-indigo-400 hover:to-indigo-500 hover:shadow-glow-brand ' +
-      'border border-indigo-400/60 shadow-[0_2px_12px_rgba(99,102,241,0.25),inset_0_1px_0_rgba(255,255,255,0.2)]',
+      'bg-xr-brand text-white ' +
+      'hover:bg-xr-brandDark hover:shadow-glow-brand ' +
+      'border border-transparent shadow-sm',
     secondary:
-      'border border-white/10 bg-white/[0.04] text-xr-text ' +
-      'hover:bg-white/[0.09] hover:border-white/20 hover:shadow-elevated-soft',
+      'bg-white border border-xr-border text-xr-text ' +
+      'hover:bg-xr-elevated hover:border-xr-line hover:shadow-sm',
     ghost:
-      'text-xr-secondary hover:bg-white/[0.06] hover:text-white',
+      'text-xr-secondary hover:bg-xr-elevated hover:text-xr-text',
     danger:
-      'border border-xr-danger/30 bg-xr-danger/10 text-red-200 ' +
-      'hover:bg-xr-danger/20 hover:border-xr-danger/50 hover:shadow-[0_0_16px_rgba(239,68,68,0.15)]',
+      'border border-xr-danger/30 bg-xr-danger/10 text-xr-danger ' +
+      'hover:bg-xr-danger hover:text-white',
     success:
-      'border border-xr-success/30 bg-xr-success/10 text-emerald-200 ' +
-      'hover:bg-xr-success/20 hover:border-xr-success/50',
+      'border border-xr-success/30 bg-xr-success/10 text-xr-success ' +
+      'hover:bg-xr-success hover:text-white',
   };
 
   return (

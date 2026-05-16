@@ -71,9 +71,9 @@ const DepotReturnSegments = ({ route, onNavigateSegment }) => {
     <div className="mt-4 p-3 bg-gray-700 rounded-lg">
       <div className="flex items-center mb-3">
         <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mr-2">
-          <span className="text-xs font-bold text-white">{segments.length}</span>
+          <span className="text-xs font-bold text-xr-text">{segments.length}</span>
         </div>
-        <h4 className="text-sm font-semibold text-white">Depot Return Segments</h4>
+        <h4 className="text-sm font-semibold text-xr-text">Depot Return Segments</h4>
       </div>
       
       <div className="space-y-2">
@@ -98,10 +98,10 @@ const DepotReturnSegments = ({ route, onNavigateSegment }) => {
                     {isCompleted ? '✓' : segment.segment_id}
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-white">
+                    <div className="text-sm font-medium text-xr-text">
                       Segment {segment.segment_id}
                     </div>
-                    <div className="text-xs text-gray-400">
+                    <div className="text-xs text-xr-muted">
                       {totalOrders} orders • {segment.distance_km}km • {segment.duration_minutes}min
                     </div>
                   </div>
@@ -113,7 +113,7 @@ const DepotReturnSegments = ({ route, onNavigateSegment }) => {
                     isCompleted ? 'bg-green-600 hover:bg-green-700' :
                     isActive ? 'bg-blue-600 hover:bg-blue-700' :
                     'bg-orange-600 hover:bg-orange-700'
-                  } text-white`}
+                  } text-xr-text`}
                 >
                   {isCompleted ? 'Review' : isActive ? 'Continue' : 'Start'}
                 </button>
@@ -129,7 +129,7 @@ const DepotReturnSegments = ({ route, onNavigateSegment }) => {
                 ></div>
               </div>
               
-              <div className="flex justify-between text-xs text-gray-400">
+              <div className="flex justify-between text-xs text-xr-muted">
                 <span>{completedOrders}/{totalOrders} completed</span>
                 <span>{Math.round(progress)}% done</span>
               </div>
@@ -151,10 +151,10 @@ const DepotReturnSegments = ({ route, onNavigateSegment }) => {
       {/* Overall Progress */}
       <div className="mt-3 pt-3 border-t border-gray-600">
         <div className="flex justify-between text-sm">
-          <span className="text-gray-300">Total Progress:</span>
-          <span className="text-white font-medium">{route.progress_percentage || 0}%</span>
+          <span className="text-xr-secondary">Total Progress:</span>
+          <span className="text-xr-text font-medium">{route.progress_percentage || 0}%</span>
         </div>
-        <div className="flex justify-between text-xs text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-xr-muted mt-1">
           <span>Est. {Math.round((route.estimated_duration_minutes || 0) / 60 * 10) / 10}h total</span>
           <span>{route.depot_returns_needed || segments.length} depot returns</span>
         </div>
@@ -339,20 +339,20 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
     const progressPercentage = routeOrders.length > 0 ? Math.round((completedOrders / routeOrders.length) * 100) : 0;
 
     return (
-      <div className="min-h-screen bg-gray-900 text-white">
+      <div className="min-h-screen bg-gray-900 text-xr-text">
         {/* Header */}
         <div className="sticky top-0 z-10 bg-gradient-to-r from-orange-500 to-yellow-500 p-4">
           <div className="flex items-center justify-between">
             <button 
               onClick={() => setSelectedRoute(null)}
-              className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+              className="p-2 hover:bg-xr-elevated rounded-lg transition-colors"
             >
               ←
             </button>
             <h1 className="text-lg font-semibold">{selectedRoute.route_name}</h1>
             <button 
               onClick={() => loadRouteDetails(selectedRoute)}
-              className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+              className="p-2 hover:bg-xr-elevated rounded-lg transition-colors"
             >
               🔄
             </button>
@@ -361,7 +361,7 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
           {/* Progress Bar */}
           <div className="mt-4">
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-sm text-gray-300">Route Progress</span>
+              <span className="text-sm text-xr-secondary">Route Progress</span>
               <span className="text-sm font-semibold">{completedOrders}/{routeOrders.length} completed</span>
             </div>
             <div className="w-full bg-gray-600 rounded-full h-2">
@@ -381,17 +381,17 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                   <div className="flex items-center mb-2">
-                    <span className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded mr-2">
+                    <span className="bg-orange-500 text-xr-text text-xs font-bold px-2 py-1 rounded mr-2">
                       #{index + 1}
                     </span>
-                    <h3 className="font-semibold text-white">{order.customer_name}</h3>
+                    <h3 className="font-semibold text-xr-text">{order.customer_name}</h3>
                   </div>
-                  <p className="text-sm text-gray-300 mb-1">{order.delivery_address}</p>
-                  <p className="text-xs text-gray-400">{order.postcode}</p>
+                  <p className="text-sm text-xr-secondary mb-1">{order.delivery_address}</p>
+                  <p className="text-xs text-xr-muted">{order.postcode}</p>
                 </div>
                 <div className="text-right ml-4">
                   <div className="text-lg font-bold text-orange-400">£{order.order_value || '0.00'}</div>
-                  <div className="text-xs text-gray-400">{order.weight || 2}kg</div>
+                  <div className="text-xs text-xr-muted">{order.weight || 2}kg</div>
                 </div>
               </div>
 
@@ -401,13 +401,13 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
                   href={`https://wego.here.com/?map=${order.latitude},${order.longitude},15,normal`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-3 rounded-lg text-sm font-medium transition-colors"
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-xr-text text-center py-2 px-3 rounded-lg text-sm font-medium transition-colors"
                 >
                   🧭 Navigate
                 </a>
                 <a 
                   href={`tel:${order.customer_phone}`}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white text-center py-2 px-3 rounded-lg text-sm font-medium transition-colors"
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-xr-text text-center py-2 px-3 rounded-lg text-sm font-medium transition-colors"
                 >
                   📞 Call
                 </a>
@@ -416,13 +416,13 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
               {/* Delivery Status */}
               <div className="flex space-x-2">
                 {order.delivery_status === 'delivered' ? (
-                  <div className="flex-1 bg-green-600 text-white text-center py-2 px-3 rounded-lg text-sm font-medium">
+                  <div className="flex-1 bg-green-600 text-xr-text text-center py-2 px-3 rounded-lg text-sm font-medium">
                     ✅ Delivered
                   </div>
                 ) : (
                   <button
                     onClick={() => updateDeliveryStatus(order.id, 'delivered')}
-                    className="flex-1 bg-orange-600 hover:bg-orange-700 text-white text-center py-2 px-3 rounded-lg text-sm font-medium transition-colors"
+                    className="flex-1 bg-orange-600 hover:bg-orange-700 text-xr-text text-center py-2 px-3 rounded-lg text-sm font-medium transition-colors"
                   >
                     📦 Mark Delivered
                   </button>
@@ -430,7 +430,7 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
               </div>
 
               {order.special_instructions && (
-                <div className="mt-3 p-2 bg-gray-700 rounded text-xs text-gray-300">
+                <div className="mt-3 p-2 bg-gray-700 rounded text-xs text-xr-secondary">
                   <strong>Instructions:</strong> {order.special_instructions}
                 </div>
               )}
@@ -448,11 +448,11 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
               <span className="text-2xl">🚛</span>
               <span className="text-xs">My Routes</span>
             </button>
-            <button className="flex flex-col items-center space-y-1 p-2 text-gray-400">
+            <button className="flex flex-col items-center space-y-1 p-2 text-xr-muted">
               <span className="text-2xl">📍</span>
               <span className="text-xs">Navigate</span>
             </button>
-            <button className="flex flex-col items-center space-y-1 p-2 text-gray-400">
+            <button className="flex flex-col items-center space-y-1 p-2 text-xr-muted">
               <span className="text-2xl">📞</span>
               <span className="text-xs">Support</span>
             </button>
@@ -464,26 +464,26 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
 
   // Main Routes List View
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-xr-text">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-gradient-to-r from-orange-500 to-yellow-500 p-4">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h1 className="text-xl font-bold">My Routes</h1>
-            <p className="text-gray-400 text-sm">Driver: {driverId} • {routes.length} assigned routes</p>
+            <p className="text-xr-muted text-sm">Driver: {driverId} • {routes.length} assigned routes</p>
           </div>
           <div className="flex items-center space-x-2">
             <button 
               onClick={() => setLiveUpdateEnabled(!liveUpdateEnabled)}
               className={`p-2 rounded-lg transition-colors ${
-                liveUpdateEnabled ? 'bg-white/20' : 'bg-white/10'
+                liveUpdateEnabled ? 'bg-xr-elevated' : 'bg-xr-elevated'
               }`}
             >
               {liveUpdateEnabled ? '🔴' : '⚪'}
             </button>
             <button 
               onClick={loadDriverRoutes}
-              className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
+              className="p-2 bg-xr-elevated rounded-lg hover:bg-xr-elevated transition-colors"
               disabled={loading}
             >
               {loading ? '⏳' : '🔄'}
@@ -493,7 +493,7 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
 
         {/* Live Update Status */}
         {liveUpdateEnabled && (
-          <div className="text-xs text-gray-200 mb-2">
+          <div className="text-xs text-xr-text mb-2">
             🔴 Live updates enabled • Last updated: {lastUpdate.toLocaleTimeString()}
           </div>
         )}
@@ -511,7 +511,7 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
         <div className="text-center py-12">
           <div className="text-6xl mb-4">⏳</div>
           <h2 className="text-xl font-semibold mb-2">Loading Routes...</h2>
-          <p className="text-gray-400">Please wait while we fetch your assignments</p>
+          <p className="text-xr-muted">Please wait while we fetch your assignments</p>
         </div>
       )}
 
@@ -523,25 +523,25 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
               <div className="text-lg font-bold text-green-500">
                 {routes.reduce((sum, route) => sum + (route.completed_orders || 0), 0)}
               </div>
-              <div className="text-xs text-gray-400">Delivered</div>
+              <div className="text-xs text-xr-muted">Delivered</div>
             </div>
             <div>
               <div className="text-lg font-bold text-orange-500">
                 {routes.reduce((sum, route) => sum + ((route.total_orders || 0) - (route.completed_orders || 0)), 0)}
               </div>
-              <div className="text-xs text-gray-400">Pending</div>
+              <div className="text-xs text-xr-muted">Pending</div>
             </div>
             <div>
               <div className="text-lg font-bold text-blue-500">
                 {routes.length > 0 ? Math.round(routes.reduce((sum, route) => sum + (route.progress_percentage || 0), 0) / routes.length) : 0}%
               </div>
-              <div className="text-xs text-gray-400">Progress</div>
+              <div className="text-xs text-xr-muted">Progress</div>
             </div>
             <div>
               <div className="text-lg font-bold text-purple-500">
                 {routes.reduce((sum, route) => sum + (route.depot_returns_needed || 1), 0)}
               </div>
-              <div className="text-xs text-gray-400">Returns</div>
+              <div className="text-xs text-xr-muted">Returns</div>
             </div>
           </div>
         </div>
@@ -552,10 +552,10 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
         <div className="text-center py-12">
           <div className="text-6xl mb-4">🚛</div>
           <h2 className="text-xl font-semibold mb-2">No Routes Assigned</h2>
-          <p className="text-gray-400 mb-4">Waiting for route assignments from dispatch</p>
+          <p className="text-xr-muted mb-4">Waiting for route assignments from dispatch</p>
           <button 
             onClick={loadDriverRoutes}
-            className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+            className="px-4 py-2 bg-orange-500 text-xr-text rounded-lg hover:bg-orange-600 transition-colors"
           >
             Check for Updates
           </button>
@@ -573,14 +573,14 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
                     className="w-4 h-4 rounded-full mr-3"
                     style={{ backgroundColor: route.zone_color || '#FF6B35' }}
                   ></div>
-                  <h2 className="text-xl font-bold text-white">{route.route_name}</h2>
+                  <h2 className="text-xl font-bold text-xr-text">{route.route_name}</h2>
                 </div>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(route.status)} text-white`}>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(route.status)} text-xr-text`}>
                   {getStatusText(route.status)}
                 </span>
               </div>
 
-              <div className="flex items-center space-x-6 mb-4 text-sm text-gray-300">
+              <div className="flex items-center space-x-6 mb-4 text-sm text-xr-secondary">
                 <div className="flex items-center space-x-1">
                   <span>⏱️</span>
                   <span>{formatDuration(route.estimated_duration_minutes)}</span>
@@ -597,7 +597,7 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
 
               {/* Progress Bar */}
               <div className="mb-4">
-                <div className="flex justify-between text-xs text-gray-400 mb-1">
+                <div className="flex justify-between text-xs text-xr-muted mb-1">
                   <span>Progress</span>
                   <span>{route.completed_orders || 0}/{route.total_orders || 0}</span>
                 </div>
@@ -610,14 +610,14 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
               </div>
 
               {/* Route Metrics */}
-              <div className="mb-4 grid grid-cols-3 gap-2 text-xs text-gray-400">
+              <div className="mb-4 grid grid-cols-3 gap-2 text-xs text-xr-muted">
                 <div className="bg-gray-700/50 rounded p-2">
                   <div className="text-gray-500">Fuel Cost</div>
-                  <div className="text-white font-semibold">£{route.estimated_fuel_cost || '0.00'}</div>
+                  <div className="text-xr-text font-semibold">£{route.estimated_fuel_cost || '0.00'}</div>
                 </div>
                 <div className="bg-gray-700/50 rounded p-2">
                   <div className="text-gray-500">Efficiency</div>
-                  <div className="text-white font-semibold">{Math.round((route.efficiency_score || 0) * 100)}%</div>
+                  <div className="text-xr-text font-semibold">{Math.round((route.efficiency_score || 0) * 100)}%</div>
                 </div>
                 <div className="bg-gray-700/50 rounded p-2">
                   <div className="text-gray-500">Depot Returns</div>
@@ -635,7 +635,7 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
               <div className="flex space-x-2 mt-4">
                 <button
                   onClick={() => loadRouteDetails(route)}
-                  className="flex-1 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  className="flex-1 bg-orange-600 hover:bg-orange-700 text-xr-text py-2 px-4 rounded-lg font-medium transition-colors"
                 >
                   View Route
                 </button>
@@ -643,7 +643,7 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
                   href={route.navigation_url || `https://wego.here.com/?map=${route.center_lat || 53.3808},${route.center_lng || -2.5740},12,normal`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  className="bg-blue-600 hover:bg-blue-700 text-xr-text py-2 px-4 rounded-lg font-medium transition-colors"
                 >
                   🧭
                 </a>
@@ -662,12 +662,12 @@ const DriverRoutes = ({ driverId = 'driver1' }) => {
           </button>
           <button 
             onClick={loadDriverRoutes}
-            className="flex flex-col items-center space-y-1 p-2 text-gray-400"
+            className="flex flex-col items-center space-y-1 p-2 text-xr-muted"
           >
             <span className="text-2xl">🔄</span>
             <span className="text-xs">Refresh</span>
           </button>
-          <button className="flex flex-col items-center space-y-1 p-2 text-gray-400">
+          <button className="flex flex-col items-center space-y-1 p-2 text-xr-muted">
             <span className="text-2xl">📊</span>
             <span className="text-xs">Stats</span>
           </button>

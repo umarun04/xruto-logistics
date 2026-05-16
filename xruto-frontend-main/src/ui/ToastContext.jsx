@@ -17,7 +17,7 @@ function ToastItem({ message, variant, onDismiss }) {
       ? 'border-emerald-500/30 bg-emerald-950/90 text-emerald-50'
       : variant === 'error'
         ? 'border-red-500/35 bg-red-950/90 text-red-50'
-        : 'border-white/15 bg-xr-surface/95 text-xr-text';
+        : 'border-xr-line bg-xr-surface/95 text-xr-text';
   const Icon = variant === 'success' ? CheckCircle2 : variant === 'error' ? AlertCircle : Info;
 
   return (

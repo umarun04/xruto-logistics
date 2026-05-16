@@ -132,7 +132,7 @@ export function SlideToConfirm({
       {/* Success state */}
       {confirmed && !loading && (
         <div className="absolute inset-0 flex items-center justify-center animate-scale-up-sm">
-          <div className="flex items-center gap-2 text-emerald-300">
+          <div className="flex items-center gap-2 text-xr-success">
             <Check className="h-5 w-5" strokeWidth={2.5} />
             <span className="text-sm font-semibold">Done!</span>
           </div>
@@ -148,7 +148,7 @@ export function SlideToConfirm({
             confirmed
               ? 'bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-glow-success'
               : 'bg-gradient-to-br from-indigo-500 to-[#3730A3] shadow-glow-brand',
-            'text-black border border-white/20',
+            'text-black border border-xr-line',
             'transition-shadow duration-200',
             isDragging && 'scale-105'
           )}

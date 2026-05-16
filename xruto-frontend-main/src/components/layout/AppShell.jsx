@@ -43,18 +43,14 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
   const initials = getInitials(user?.name);
 
   return (
-    <div className="min-h-screen text-xr-text">
-      {/* Background layers */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 bg-grid opacity-[0.4]" />
-      <div aria-hidden className="pointer-events-none fixed inset-0 bg-noise" />
-
+    <div className="min-h-screen text-xr-text bg-xr-bg">
       <div className="relative flex min-h-screen">
         {/* ── Sidebar (desktop) ── */}
         <aside
           className={cn(
             'hidden md:flex h-screen sticky top-0 shrink-0 flex-col',
-            'border-r border-white/[0.07]',
-            'bg-xr-sidebar/70 backdrop-blur-2xl',
+            'border-r border-xr-line',
+            'bg-xr-sidebar/95 backdrop-blur-2xl',
             'transition-[width] duration-300 ease-spring z-40',
             collapsed ? 'w-[72px]' : 'w-[240px]'
           )}
@@ -65,7 +61,7 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
           {/* Logo header */}
           <div className={cn('flex items-center justify-between px-4 py-4', collapsed && 'px-3 justify-center')}>
             <div className={cn('flex items-center gap-3 min-w-0 overflow-hidden', collapsed && 'gap-0')}>
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-control border border-white/10 bg-white/[0.04] transition-shadow hover:shadow-glow">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-control border border-xr-border bg-white transition-shadow hover:shadow-soft">
                 <BrandLogo className="h-8 w-8" alt="" />
               </div>
               <div
@@ -74,7 +70,7 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
                   collapsed ? 'w-0 opacity-0' : 'w-full opacity-100'
                 )}
               >
-                <div className="truncate text-sm font-bold text-white tracking-tight">xRuto</div>
+                <div className="truncate text-sm font-bold text-xr-text tracking-tight">xRuto</div>
                 <div className="truncate text-[10px] text-xr-muted tracking-wide">Logistics Intelligence</div>
               </div>
             </div>
@@ -84,8 +80,8 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
               onClick={toggleCollapsed}
               className={cn(
                 'ml-2 inline-flex h-8 w-8 items-center justify-center rounded-control',
-                'border border-white/[0.08] bg-white/[0.03] text-xr-secondary',
-                'transition hover:bg-white/[0.08] hover:text-white hover:border-white/15',
+                'border border-xr-line bg-white text-xr-secondary',
+                'transition hover:bg-xr-elevated hover:text-xr-text hover:border-xr-border',
                 collapsed && 'ml-0'
               )}
               aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
@@ -122,8 +118,8 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
                       'transition-all duration-200 ease-out',
                       collapsed && 'justify-center px-2',
                       active
-                        ? 'bg-white/[0.08] text-white'
-                        : 'text-xr-secondary hover:bg-white/[0.05] hover:text-white'
+                        ? 'bg-xr-brand/10 text-xr-brand'
+                        : 'text-xr-secondary hover:bg-xr-elevated hover:text-xr-text'
                     )}
                     title={collapsed ? t.label : undefined}
                   >
@@ -138,7 +134,7 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
                     <Icon
                       className={cn(
                         'h-[18px] w-[18px] shrink-0 transition-all duration-200',
-                        active ? 'text-xr-brand' : 'group-hover:scale-110 group-hover:text-white/80'
+                        active ? 'text-xr-brand' : 'group-hover:scale-110 group-hover:text-xr-text'
                       )}
                       strokeWidth={active ? 2.2 : 1.8}
                     />
@@ -158,14 +154,14 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
           </nav>
 
           {/* User footer */}
-          <div className={cn('border-t border-white/[0.06] p-3', collapsed && 'p-2')}>
+          <div className={cn('border-t border-xr-line p-3', collapsed && 'p-2')}>
             <div
               className={cn(
-                'flex items-center gap-3 rounded-control border border-white/[0.07] bg-white/[0.025] p-2.5',
+                'flex items-center gap-3 rounded-control border border-xr-border bg-xr-surface p-2.5 shadow-sm',
                 collapsed && 'justify-center p-2'
               )}
             >
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-xr-brand/30 to-indigo-700/30 ring-1 ring-xr-brand/25 text-[11px] font-bold text-indigo-200">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-xr-elevated border border-xr-border text-[11px] font-bold text-xr-brand">
                 {initials}
               </div>
               <div
@@ -174,14 +170,14 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
                   collapsed ? 'w-0 opacity-0' : 'w-full opacity-100'
                 )}
               >
-                <div className="truncate text-xs font-semibold text-white">{user?.name || 'User'}</div>
+                <div className="truncate text-xs font-semibold text-xr-text">{user?.name || 'User'}</div>
                 <div className="truncate text-[10px] text-xr-muted">{isAdmin ? 'Administrator' : 'Driver'}</div>
               </div>
               {!collapsed && (
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="inline-flex h-8 items-center gap-1.5 rounded-control border border-xr-danger/20 bg-xr-danger/10 px-2.5 text-[11px] font-semibold text-red-300 transition hover:bg-xr-danger/20 hover:border-xr-danger/35"
+                  className="inline-flex h-8 items-center gap-1.5 rounded-control border border-xr-danger/20 bg-xr-danger/10 px-2.5 text-[11px] font-semibold text-xr-danger transition hover:bg-xr-danger/20 hover:border-xr-danger/35"
                 >
                   <LogOut className="h-3.5 w-3.5" />
                   Out
@@ -192,7 +188,7 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
               <button
                 type="button"
                 onClick={onLogout}
-                className="mt-2 inline-flex w-full items-center justify-center rounded-control border border-xr-danger/20 bg-xr-danger/10 py-2 text-[11px] font-semibold text-red-300 transition hover:bg-xr-danger/20"
+                className="mt-2 inline-flex w-full items-center justify-center rounded-control border border-xr-danger/20 bg-xr-danger/10 py-2 text-[11px] font-semibold text-xr-danger transition hover:bg-xr-danger/20"
                 title="Log out"
               >
                 <LogOut className="h-3.5 w-3.5" />
@@ -202,18 +198,18 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
         </aside>
 
         {/* ── Main content area ── */}
-        <div className="relative flex min-w-0 flex-1 flex-col overflow-hidden">
+        <div className="relative flex min-w-0 flex-1 flex-col overflow-hidden bg-xr-bg">
           {/* Topbar */}
-          <header className="sticky top-0 z-30 border-b border-white/[0.07] bg-xr-surface/75 backdrop-blur-2xl shadow-soft">
+          <header className="sticky top-0 z-30 border-b border-xr-line bg-xr-surface/90 backdrop-blur-xl shadow-sm">
             <div className="mx-auto max-w-section px-4 py-3 sm:px-6 sm:py-3.5">
               <div className="flex min-h-[2.75rem] items-center justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 text-[11px] text-xr-muted">
                     <span className="font-medium">{meta.breadcrumb?.[0] || 'App'}</span>
-                    <span className="opacity-30">/</span>
+                    <span className="opacity-40">/</span>
                     <span className="text-xr-secondary font-medium">{meta.breadcrumb?.[1] || meta.label}</span>
                   </div>
-                  <div className="mt-0.5 font-heading text-h2 font-semibold text-white leading-snug">
+                  <div className="mt-0.5 font-heading text-h2 font-semibold text-xr-text leading-snug">
                     {meta.breadcrumb?.[1] || meta.label}
                   </div>
                 </div>
@@ -225,7 +221,7 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="touch-target md:hidden text-xr-muted hover:text-red-300"
+                    className="touch-target md:hidden text-xr-muted hover:text-xr-danger"
                     onClick={onLogout}
                     aria-label="Log out"
                   >
@@ -245,7 +241,7 @@ export function AppShell({ currentView, onChangeView, user, onLogout, children }
 
       {/* ── Mobile bottom navigation ── */}
       <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.07] bg-xr-bg/92 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-1 backdrop-blur-2xl shadow-[0_-8px_40px_rgba(0,0,0,0.55)]"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-xr-line bg-xr-surface/95 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-1 backdrop-blur-xl shadow-[0_-8px_20px_rgba(0,0,0,0.05)]"
         aria-label="Primary navigation"
       >
         <div

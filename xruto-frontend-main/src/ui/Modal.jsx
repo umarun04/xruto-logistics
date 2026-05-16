@@ -45,7 +45,7 @@ export function Modal({ open, title, description, children, onClose, className }
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}
         className={cn(
-          'relative w-full max-w-sm rounded-card border border-white/10 bg-xr-surface p-6',
+          'relative w-full max-w-sm rounded-card border border-xr-line bg-xr-surface p-6',
           'shadow-[0_24px_60px_rgba(0,0,0,0.6)]',
           'ring-1 ring-inset ring-white/[0.05]',
           'animate-slide-up-fade',
@@ -66,14 +66,14 @@ export function Modal({ open, title, description, children, onClose, className }
           <div className="mb-5">
             <div className="flex items-start justify-between gap-3">
               {title && (
-                <h3 id="modal-title" className="font-heading text-base font-semibold text-white leading-tight">
+                <h3 id="modal-title" className="font-heading text-base font-semibold text-xr-text leading-tight">
                   {title}
                 </h3>
               )}
               <button
                 type="button"
                 onClick={() => onClose?.()}
-                className="ml-auto -mr-1 -mt-1 flex h-8 w-8 items-center justify-center rounded-control text-xr-muted transition hover:bg-white/[0.06] hover:text-white"
+                className="ml-auto -mr-1 -mt-1 flex h-8 w-8 items-center justify-center rounded-control text-xr-muted transition hover:bg-xr-elevated hover:text-xr-text"
                 aria-label="Close"
               >
                 <X className="h-4 w-4" />

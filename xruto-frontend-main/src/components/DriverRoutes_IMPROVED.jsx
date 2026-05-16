@@ -72,7 +72,7 @@ const ZoneCard = ({ route, index, onNavigate, onOrderNav, onOrderStatus }) => {
   const isInProgress = !isCompleted && (pct > 0 || inProgressByApi);
 
   const statusLabel = isCompleted ? 'Completed' : isInProgress ? 'In Progress' : 'Not Started';
-  const statusColor = isCompleted ? 'text-emerald-300 bg-xr-success/15' : isInProgress ? 'text-indigo-200 bg-xr-brand/15' : 'text-red-300 bg-xr-danger/15';
+  const statusColor = isCompleted ? 'text-xr-success bg-xr-success/15' : isInProgress ? 'text-xr-brandDark bg-xr-brand/15' : 'text-xr-danger bg-xr-danger/15';
 
   return (
     <Card variant="glass" className="overflow-hidden border-l-2 border-l-xr-brand/35 animate-fade-up" style={{ animationDelay: `${index * 100}ms` }}>
@@ -80,7 +80,7 @@ const ZoneCard = ({ route, index, onNavigate, onOrderNav, onOrderStatus }) => {
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-2">
-            <span className="text-base font-semibold text-white">Zone {zoneLetter}</span>
+            <span className="text-base font-semibold text-xr-text">Zone {zoneLetter}</span>
             <span className="text-xs text-xr-muted">Delivery route</span>
           </div>
           <span className={`text-xs font-semibold px-3 py-1 rounded-full ${statusColor}`}>{statusLabel}</span>
@@ -145,16 +145,16 @@ const ZoneCard = ({ route, index, onNavigate, onOrderNav, onOrderStatus }) => {
           {allOrders.map((order, idx) => {
             const isDone = orderIsDelivered(order) || order.status === 'failed' || order.delivery_status === 'failed';
             return (
-              <div key={order.id || idx} className={`flex flex-col sm:flex-row sm:items-center gap-3 p-3 rounded-xl ${isDone ? 'bg-xr-surface/50' : 'bg-xr-surface'} border border-white/5 shadow-soft hover:shadow-panel transition-all animate-fade-up`} style={{ animationDelay: `${Math.min(idx * 50, 500)}ms` }}>
+              <div key={order.id || idx} className={`flex flex-col sm:flex-row sm:items-center gap-3 p-3 rounded-xl ${isDone ? 'bg-xr-surface/50' : 'bg-xr-surface'} border border-xr-line shadow-soft hover:shadow-panel transition-all animate-fade-up`} style={{ animationDelay: `${Math.min(idx * 50, 500)}ms` }}>
                 <div
                   className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-bold ${
-                    isDone ? 'bg-white/[0.06] text-emerald-300' : 'bg-white/[0.06] text-xr-secondary'
+                    isDone ? 'bg-xr-elevated text-xr-success' : 'bg-xr-elevated text-xr-secondary'
                   }`}
                 >
                   {isDone ? '\u2713' : idx + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium ${isDone ? 'text-xr-subtle line-through' : 'text-white'}`}>{order.customer_name}</p>
+                  <p className={`text-sm font-medium ${isDone ? 'text-xr-subtle line-through' : 'text-xr-text'}`}>{order.customer_name}</p>
                   <p className="text-xs text-xr-subtle truncate">{order.delivery_address}</p>
                 </div>
                 <div className="shrink-0 flex flex-wrap items-center sm:justify-end gap-1.5 w-full sm:w-auto mt-2 sm:mt-0">
@@ -167,7 +167,7 @@ const ZoneCard = ({ route, index, onNavigate, onOrderNav, onOrderStatus }) => {
                         type="button"
                         size="sm"
                         variant="secondary"
-                        className="border border-emerald-500/20 text-emerald-200"
+                        className="border border-emerald-500/20 text-xr-success"
                         onClick={() => onOrderStatus(order.id, 'delivered')}
                       >
                         Done
@@ -186,7 +186,7 @@ const ZoneCard = ({ route, index, onNavigate, onOrderNav, onOrderStatus }) => {
 
       {isCompleted && (
         <div className="border-t border-xr-line/80 px-4 py-3">
-          <div className="flex items-center justify-center gap-2 text-sm font-medium text-emerald-300/90">
+          <div className="flex items-center justify-center gap-2 text-sm font-medium text-xr-success">
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -334,7 +334,7 @@ const DriverRoutes = () => {
         <div className="w-14 h-14 rounded-2xl bg-red-500/15 flex items-center justify-center">
           <svg className="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
         </div>
-        <p className="text-white font-semibold">Failed to Load Routes</p>
+        <p className="text-xr-text font-semibold">Failed to Load Routes</p>
         <p className="text-sm text-xr-subtle">{error}</p>
         <Button variant="primary" onClick={loadRoutes}>Try Again</Button>
       </div>
@@ -353,7 +353,7 @@ const DriverRoutes = () => {
               onClick={() => setLiveUpdate(v => !v)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition ${
                 liveUpdate
-                  ? 'bg-xr-success/15 text-emerald-300 border border-xr-success/30'
+                  ? 'bg-xr-success/15 text-xr-success border border-xr-success/30'
                   : 'bg-xr-panel text-xr-subtle border border-xr-line'
               }`}
             >
@@ -372,8 +372,8 @@ const DriverRoutes = () => {
         {totalOrders > 0 && (
           <div className="bg-xr-panel border border-xr-line rounded-2xl p-4 mb-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-300 font-medium">Today's Progress</span>
-              <span className="text-sm font-bold text-indigo-200">{overallPct}%</span>
+              <span className="text-sm text-xr-secondary font-medium">Today's Progress</span>
+              <span className="text-sm font-bold text-xr-brandDark">{overallPct}%</span>
             </div>
             <div className="h-2 bg-xr-bg rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-xr-brand to-indigo-400 rounded-full transition-all duration-700" style={{ width: `${overallPct}%` }} />

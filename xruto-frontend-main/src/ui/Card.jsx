@@ -6,16 +6,16 @@ export function Card({ as: Comp = 'section', variant = 'glass', className, child
     'rounded-card border transition-all duration-300 ease-out will-change-transform';
   const variants = {
     glass:
-      'glass-card border-white/10 ring-1 ring-inset ring-white/[0.04]',
+      'glass-card ring-1 ring-inset ring-black/[0.02]',
     solid:
-      'bg-xr-surface border-xr-line ' +
-      'hover:-translate-y-[2px] hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-white/10 ' +
-      'shadow-soft ring-1 ring-inset ring-white/[0.03]',
+      'bg-white border-xr-border ' +
+      'hover:-translate-y-[2px] hover:shadow-soft hover:border-xr-line ' +
+      'shadow-panel ring-1 ring-inset ring-black/[0.02]',
     soft:
-      'bg-white/[0.025] border-white/[0.07] backdrop-blur-md ' +
-      'hover:bg-white/[0.045] hover:border-white/[0.12]',
+      'bg-xr-elevated border-xr-border ' +
+      'hover:bg-white hover:border-xr-line',
     flat:
-      'bg-xr-elevated border-xr-line',
+      'bg-xr-elevated border-xr-border',
   };
   return (
     <Comp className={cn(base, variants[variant] || variants.glass, className)} {...props}>
@@ -28,7 +28,7 @@ export function CardHeader({ className, children, ...props }) {
   return (
     <header
       className={cn(
-        'flex flex-wrap items-start justify-between gap-3 border-b border-white/[0.06] px-4 py-3.5 sm:px-5 sm:py-4',
+        'flex flex-wrap items-start justify-between gap-3 border-b border-xr-line px-4 py-3.5 sm:px-5 sm:py-4',
         className
       )}
       {...props}

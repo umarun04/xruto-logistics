@@ -10,7 +10,7 @@ export function Toggle({ checked, onChange, disabled, className }) {
       onClick={() => onChange?.(!checked)}
       className={cn(
         'relative inline-flex h-6 w-11 items-center rounded-full transition duration-200 ease-out focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-        checked ? 'bg-xr-brand' : 'bg-white/10',
+        checked ? 'bg-xr-brand' : 'bg-slate-300',
         className
       )}
     >

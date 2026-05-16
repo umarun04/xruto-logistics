@@ -202,13 +202,13 @@ Weight: 2.8kg`;
 
   const [focusOnce, setFocusOnce] = useState(false);
   const inputBarCls =
-    'w-full min-h-[220px] max-h-[min(60vh,680px)] rounded-2xl border border-white/10 bg-xr-surface px-4 py-3 font-mono text-[13px] leading-relaxed text-gray-200 placeholder-gray-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:ring-offset-0 focus:border-[#F59E0B]/40 resize-y';
+    'w-full min-h-[220px] max-h-[min(60vh,680px)] rounded-2xl border border-xr-line bg-xr-surface px-4 py-3 font-mono text-[13px] leading-relaxed text-xr-text placeholder-gray-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:ring-offset-0 focus:border-[#F59E0B]/40 resize-y';
 
   return (
     <div className="glass-card min-w-0 overflow-hidden rounded-2xl">
-      <div className="border-b border-white/5 px-4 py-3 sm:px-5 sm:py-3.5">
+      <div className="border-b border-xr-line px-4 py-3 sm:px-5 sm:py-3.5">
         <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#F59E0B]/80">Text import</p>
-        <h3 className="text-sm font-semibold text-white sm:text-base">Bulk text upload</h3>
+        <h3 className="text-sm font-semibold text-xr-text sm:text-base">Bulk text upload</h3>
         <p className="mt-0.5 text-xs text-gray-500 sm:text-sm">
           Paste from Word, Excel, or any plain text. Faster than reformatting PDFs.
         </p>
@@ -216,13 +216,13 @@ Weight: 2.8kg`;
 
       <div className="p-4 sm:p-5">
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <label className="text-xs font-medium text-gray-400" htmlFor="order-text-bulk">
+          <label className="text-xs font-medium text-xr-muted" htmlFor="order-text-bulk">
             Order text
           </label>
           <button
             type="button"
             onClick={insertSample}
-            className="inline-flex w-fit items-center gap-1.5 rounded-lg border border-[#1a2a45] bg-[#0a0e1a] px-2.5 py-1.5 text-xs font-medium text-orange-400/90 transition hover:border-orange-500/30 hover:bg-orange-500/10"
+            className="inline-flex w-fit items-center gap-1.5 rounded-lg border border-[#1a2a45] bg-xr-surface px-2.5 py-1.5 text-xs font-medium text-orange-400/90 transition hover:border-orange-500/30 hover:bg-orange-500/10"
           >
             <Plus className="h-3.5 w-3.5" strokeWidth={2} />
             Insert sample
@@ -257,15 +257,15 @@ Weight: 2.8kg`;
       {previewOrders.length > 0 && (
         <div className="mx-4 mb-4 space-y-3 rounded-xl border border-blue-500/20 bg-blue-500/5 p-3 sm:mx-5 sm:p-4">
           <div className="flex items-center justify-between gap-2">
-            <h4 className="text-sm font-semibold text-blue-200">Preview: {previewOrders.length} order{previewOrders.length !== 1 ? 's' : ''}</h4>
-            <span className="shrink-0 rounded-md bg-blue-500/20 px-2 py-0.5 text-[10px] font-medium text-blue-300">Ready to upload</span>
+            <h4 className="text-sm font-semibold text-xr-info">Preview: {previewOrders.length} order{previewOrders.length !== 1 ? 's' : ''}</h4>
+            <span className="shrink-0 rounded-md bg-blue-500/20 px-2 py-0.5 text-[10px] font-medium text-xr-info">Ready to upload</span>
           </div>
-          <div className="max-h-32 overflow-y-auto rounded-lg border border-white/5 bg-[#0a0e1a] p-2 text-xs text-gray-300 scrollbar-thin">
+          <div className="max-h-32 overflow-y-auto rounded-lg border border-xr-line bg-xr-surface p-2 text-xs text-xr-secondary scrollbar-thin">
             {previewOrders.slice(0, 8).map((order, index) => (
-              <div key={index} className="border-b border-white/5 py-1.5 last:border-0 last:pb-0">
-                <span className="font-medium text-white">{order.customer_name}</span>
+              <div key={index} className="border-b border-xr-line py-1.5 last:border-0 last:pb-0">
+                <span className="font-medium text-xr-text">{order.customer_name}</span>
                 <span className="text-gray-500"> — </span>
-                <span className="text-gray-400 line-clamp-1">{order.delivery_address}</span>
+                <span className="text-xr-muted line-clamp-1">{order.delivery_address}</span>
                 {order.postcode && <span className="ml-1 text-gray-500">({order.postcode})</span>}
                 {order.order_value != null && (
                   <span className="ml-1 text-orange-400/90">· £{order.order_value}</span>
@@ -301,10 +301,10 @@ Weight: 2.8kg`;
         <div className="mx-4 mb-4 flex gap-2 rounded-xl border border-red-500/25 bg-red-500/10 p-3 sm:mx-5">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-medium text-red-200">Error</p>
-            <p className="text-xs text-red-300/90">{error}</p>
+            <p className="text-xs font-medium text-xr-danger">Error</p>
+            <p className="text-xs text-xr-danger">{error}</p>
           </div>
-          <button type="button" onClick={clearResults} className="shrink-0 text-red-400/80 hover:text-red-300" aria-label="Dismiss">
+          <button type="button" onClick={clearResults} className="shrink-0 text-red-400/80 hover:text-xr-danger" aria-label="Dismiss">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -313,20 +313,20 @@ Weight: 2.8kg`;
       {uploadResult?.success && (
         <div className="mx-4 mb-4 flex gap-2 rounded-xl border border-emerald-500/25 bg-emerald-500/10 p-3 sm:mx-5">
           <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-          <div className="min-w-0 flex-1 text-xs text-emerald-200/90">
-            <p className="font-medium text-emerald-100">{uploadResult.message}</p>
-            <p className="mt-1 text-emerald-200/80">
+          <div className="min-w-0 flex-1 text-xs text-xr-success">
+            <p className="font-medium text-xr-success">{uploadResult.message}</p>
+            <p className="mt-1 text-xr-success">
               Processed {uploadResult.extractedCount} · Added {uploadResult.insertedCount}
             </p>
           </div>
-          <button type="button" onClick={clearResults} className="shrink-0 text-emerald-400/80 hover:text-emerald-300" aria-label="Dismiss">
+          <button type="button" onClick={clearResults} className="shrink-0 text-emerald-400/80 hover:text-xr-success" aria-label="Dismiss">
             <X className="h-4 w-4" />
           </button>
         </div>
       )}
 
-      <details className="group border-t border-white/5 bg-[#0a0e1a]/50">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-xs font-medium text-gray-400 transition hover:text-gray-300 sm:px-5">
+      <details className="group border-t border-xr-line bg-xr-surface/50">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-xs font-medium text-xr-muted transition hover:text-xr-secondary sm:px-5">
           <span className="inline-flex items-center gap-2">
             <FileText className="h-4 w-4 text-gray-500" />
             Format guide
@@ -334,9 +334,9 @@ Weight: 2.8kg`;
           <ChevronDown className="h-4 w-4 shrink-0 text-gray-500 transition group-open:rotate-180" />
         </summary>
         <div className="space-y-2 px-4 pb-4 text-xs text-gray-500 sm:px-5">
-          <p>Start each order with <code className="rounded bg-white/5 px-1 text-gray-300">Order 1:</code> (any number). Use <code className="rounded bg-white/5 px-1">Field: value</code> on separate lines.</p>
-          <p>Required: <span className="text-gray-400">Customer</span>, <span className="text-gray-400">Address</span>. Optional: Email, Phone, Postcode, City, coordinates, value, weight.</p>
-          <pre className="mt-2 overflow-x-auto rounded-lg border border-[#1a2a45] bg-[#0a0e1a] p-2.5 font-mono text-[11px] leading-relaxed text-gray-400">
+          <p>Start each order with <code className="rounded bg-xr-elevated px-1 text-xr-secondary">Order 1:</code> (any number). Use <code className="rounded bg-xr-elevated px-1">Field: value</code> on separate lines.</p>
+          <p>Required: <span className="text-xr-muted">Customer</span>, <span className="text-xr-muted">Address</span>. Optional: Email, Phone, Postcode, City, coordinates, value, weight.</p>
+          <pre className="mt-2 overflow-x-auto rounded-lg border border-[#1a2a45] bg-xr-surface p-2.5 font-mono text-[11px] leading-relaxed text-xr-muted">
             {`Order 1:
 Customer: John Smith
 Address: 123 Main St, Warrington WA1 2AB

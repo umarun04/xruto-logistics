@@ -67,7 +67,7 @@ const LoginInputField = ({ icon, type = 'text', value, onChange, placeholder, sh
   <div className="relative">
     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-xr-muted"><Ico d={icon} className="w-4.5 h-4.5" /></div>
     <input type={type} value={value} onChange={onChange} placeholder={placeholder}
-      className="w-full rounded-control border border-white/10 bg-xr-bg/50 py-3.5 pl-11 pr-11 text-sm text-xr-text placeholder-xr-muted backdrop-blur-sm transition focus:border-xr-brand/40 focus:outline-none focus:ring-2 focus:ring-xr-brand/20" />
+      className="w-full rounded-control border border-xr-line bg-white py-3.5 pl-11 pr-11 text-sm text-xr-text placeholder-xr-muted backdrop-blur-sm transition focus:border-xr-brand/40 focus:outline-none focus:ring-2 focus:ring-xr-brand/20" />
     {showToggle && (
       <button type="button" onClick={onToggle} className="absolute right-4 top-1/2 -translate-y-1/2 text-xr-muted hover:text-xr-text">
         <Ico d={isPassword ? ICONS.eyeOff : ICONS.eye} className="w-4.5 h-4.5" />
@@ -134,24 +134,23 @@ const LoginScreen = ({ onLogin }) => {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-xr-bg px-4 py-10 md:px-6">
-      <div aria-hidden className="pointer-events-none fixed inset-0 bg-grid opacity-[0.35] animate-fade-in delay-200" />
-      <div aria-hidden className="pointer-events-none fixed inset-0 bg-noise animate-fade-in" />
+      <div aria-hidden className="pointer-events-none fixed inset-0 bg-grid animate-fade-in delay-200" />
       <UiCard variant="glass" className="relative z-10 w-full max-w-sm p-6 shadow-panel md:max-w-md md:p-10 animate-scale-up-sm">
         <div className="flex flex-col items-center">
           <div className="mb-8 w-full text-center">
             <div className="inline-flex flex-col items-center animate-fade-up delay-100">
-              <div className="mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-card border border-white/10 shadow-[0_0_30px_rgba(99,102,241,0.25)] bg-gradient-to-b from-white/[0.08] to-transparent animate-glow-once">
+              <div className="mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-card border border-xr-line shadow-[0_4px_20px_rgba(99,102,241,0.15)] bg-gradient-to-b from-xr-brand/5 to-transparent animate-glow-once">
                 <BrandLogo className="h-12 w-12" alt="xRuto" />
               </div>
-              <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">xRuto</h1>
+              <h1 className="text-3xl font-bold tracking-tight text-xr-text sm:text-4xl">xRuto</h1>
               <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-xr-brand">Logistics Intelligence</p>
             </div>
           </div>
           {view === 'login' && (
             <div className="w-full animate-fade-up delay-200">
-              <h2 className="mb-6 text-center text-lg font-semibold text-white">Sign in to your account</h2>
+              <h2 className="mb-6 text-center text-lg font-semibold text-xr-text">Sign in to your account</h2>
               {error && (
-                <div className="mb-4 w-full rounded-control border border-xr-danger/25 bg-xr-danger/10 px-4 py-3 text-center text-sm text-red-200">{error}</div>
+                <div className="mb-4 w-full rounded-control border border-xr-danger/25 bg-xr-danger/10 px-4 py-3 text-center text-sm text-xr-danger">{error}</div>
               )}
               <div className="w-full space-y-4">
                 <LoginInputField icon={ICONS.user} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your Email Address" />
@@ -165,13 +164,13 @@ const LoginScreen = ({ onLogin }) => {
           )}
           {view === 'forgot' && (
             <>
-              <h2 className="mb-2 text-center text-lg font-semibold text-white">Reset password</h2>
+              <h2 className="mb-2 text-center text-lg font-semibold text-xr-text">Reset password</h2>
               <p className="mb-8 text-center text-sm text-xr-muted">Enter your email to receive a reset link</p>
               {error && (
-                <div className="mb-4 w-full rounded-control border border-xr-danger/25 bg-xr-danger/10 px-4 py-3 text-center text-sm text-red-200">{error}</div>
+                <div className="mb-4 w-full rounded-control border border-xr-danger/25 bg-xr-danger/10 px-4 py-3 text-center text-sm text-xr-danger">{error}</div>
               )}
               {successMsg && (
-                <div className="mb-4 w-full rounded-control border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-center text-sm text-emerald-200">{successMsg}</div>
+                <div className="mb-4 w-full rounded-control border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-center text-sm text-xr-success">{successMsg}</div>
               )}
               <div className="w-full space-y-4">
                 <LoginInputField icon={ICONS.user} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your Email Address" />
@@ -185,13 +184,13 @@ const LoginScreen = ({ onLogin }) => {
           )}
           {view === 'reset' && (
             <>
-              <h2 className="mb-2 text-center text-lg font-semibold text-white">Set new password</h2>
+              <h2 className="mb-2 text-center text-lg font-semibold text-xr-text">Set new password</h2>
               <p className="mb-8 text-center text-sm text-xr-muted">Enter your new password below</p>
               {error && (
-                <div className="mb-4 w-full rounded-control border border-xr-danger/25 bg-xr-danger/10 px-4 py-3 text-center text-sm text-red-200">{error}</div>
+                <div className="mb-4 w-full rounded-control border border-xr-danger/25 bg-xr-danger/10 px-4 py-3 text-center text-sm text-xr-danger">{error}</div>
               )}
               {successMsg && (
-                <div className="mb-4 w-full rounded-control border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-center text-sm text-emerald-200">{successMsg}</div>
+                <div className="mb-4 w-full rounded-control border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-center text-sm text-xr-success">{successMsg}</div>
               )}
               <div className="w-full space-y-4">
                 <LoginInputField icon={ICONS.lock} type="password" value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="New Password (min 6 chars)" />
@@ -465,13 +464,13 @@ const AnalyticsScreen = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 border-b border-xr-line pb-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-xr-muted">
           <span className="text-xr-secondary">{range.start}</span>
-          <span className="mx-1.5 text-white/25">—</span>
+          <span className="mx-1.5 text-xr-text">—</span>
           <span className="text-xr-secondary">{range.end}</span>
         </p>
-        <div className="inline-flex w-full max-w-md overflow-x-auto rounded-control border border-white/10 bg-white/[0.03] p-1 sm:w-auto">
+        <div className="inline-flex w-full max-w-md overflow-x-auto rounded-control border border-xr-line bg-xr-elevated p-1 sm:w-auto">
           {[
             { id: 'today', label: 'Today' },
             { id: 'week', label: '7d' },
@@ -655,7 +654,7 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
   };
 
   const inputCls =
-    'w-full rounded-control border border-white/10 bg-xr-bg/60 px-4 py-2.5 text-sm text-xr-text placeholder-xr-muted focus:border-xr-brand/40 focus:outline-none focus:ring-2 focus:ring-xr-brand/20';
+    'w-full rounded-control border border-xr-line bg-white px-4 py-2.5 text-sm text-xr-text placeholder-xr-muted focus:border-xr-brand/40 focus:outline-none focus:ring-2 focus:ring-xr-brand/20';
 
   const goHome = () => {
     setPanel('home');
@@ -672,14 +671,14 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center justify-between gap-3 rounded-card border border-white/10 bg-white/[0.02] px-4 py-3.5 text-left transition hover:border-xr-brand/25 hover:bg-white/[0.05]"
+      className="flex w-full items-center justify-between gap-3 rounded-card border border-xr-line bg-xr-elevated px-4 py-3.5 text-left transition hover:border-xr-brand/25 hover:bg-xr-elevated"
     >
       <div className="flex min-w-0 items-center gap-3">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-control border border-white/10 bg-xr-bg/80 text-xr-secondary">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-control border border-xr-line bg-white text-xr-secondary">
           <Ico d={icon} className="h-4 w-4" />
         </span>
         <div className="min-w-0">
-          <p className="text-sm font-medium text-white">{label}</p>
+          <p className="text-sm font-medium text-xr-text">{label}</p>
           {hint && <p className="text-xs text-xr-muted">{hint}</p>}
         </div>
       </div>
@@ -695,10 +694,10 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
             <p className="text-sm text-xr-muted">Profile, password, and store connections.</p>
             <UiCard variant="glass" className="flex flex-col items-center px-6 py-8 text-center">
               <div className="text-[11px] font-medium uppercase tracking-[0.2em] text-xr-muted">Signed in</div>
-              <div className="mt-3 flex h-16 w-16 items-center justify-center rounded-card bg-gradient-to-br from-xr-brand to-xr-info text-xl font-bold text-white shadow-lg shadow-xr-brand/25">
+              <div className="mt-3 flex h-16 w-16 items-center justify-center rounded-card bg-gradient-to-br from-xr-brand to-xr-info text-xl font-bold text-xr-text shadow-lg shadow-xr-brand/25">
                 {initials}
               </div>
-              <p className="mt-3 text-base font-semibold text-white">{user?.name || 'User'}</p>
+              <p className="mt-3 text-base font-semibold text-xr-text">{user?.name || 'User'}</p>
               <p className="text-xs text-xr-muted">{user?.role === 'admin' ? 'Administrator' : 'Driver'}</p>
               {user?.email && <p className="mt-2 max-w-full truncate text-xs text-xr-subtle">{user.email}</p>}
             </UiCard>
@@ -722,7 +721,7 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
         {panel === 'profile' && (
           <div>
             <BackLink />
-            <h2 className="text-xl font-bold tracking-tight text-white">Profile</h2>
+            <h2 className="text-xl font-bold tracking-tight text-xr-text">Profile</h2>
             <p className="mt-1 text-sm text-xr-muted">How you appear in the app.</p>
             <UiCard variant="glass" className="mt-4 space-y-4 p-5 sm:p-6">
               <div>
@@ -740,7 +739,7 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
         {panel === 'password' && (
           <div>
             <BackLink />
-            <h2 className="text-xl font-bold tracking-tight text-white">Security</h2>
+            <h2 className="text-xl font-bold tracking-tight text-xr-text">Security</h2>
             <p className="mt-1 text-sm text-xr-muted">Change your account password.</p>
             <UiCard variant="glass" className="mt-4 space-y-4 p-5 sm:p-6">
               <div>
@@ -765,7 +764,7 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
         {panel === 'contact' && (
           <div>
             <BackLink />
-            <h2 className="text-xl font-bold tracking-tight text-white">Contact</h2>
+            <h2 className="text-xl font-bold tracking-tight text-xr-text">Contact</h2>
             <p className="mt-1 text-sm text-xr-muted">We respond within one business day.</p>
             <UiCard variant="glass" className="mt-4 space-y-3 p-5 text-sm text-xr-secondary sm:p-6">
               <p>
@@ -783,11 +782,11 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
         {panel === 'woocommerce' && user?.role === 'admin' && (
           <div>
             <BackLink />
-            <h2 className="text-xl font-bold tracking-tight text-white">WooCommerce</h2>
+            <h2 className="text-xl font-bold tracking-tight text-xr-text">WooCommerce</h2>
             <p className="mt-1 text-sm text-xr-muted">Connect stores and sync orders.</p>
             <UiCard variant="glass" className="mt-4 space-y-4 p-5 sm:p-6">
               <div>
-                <h3 className="text-sm font-semibold text-white">Connected stores</h3>
+                <h3 className="text-sm font-semibold text-xr-text">Connected stores</h3>
                 <p className="mt-1 text-xs text-xr-muted">REST API keys from WooCommerce → Settings → Advanced → REST API</p>
               </div>
               {wooStores.length === 0 ? (
@@ -797,20 +796,20 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
                   {wooStores.map((store) => (
                     <div
                       key={store.id}
-                      className="flex items-center justify-between gap-3 rounded-control border border-white/10 bg-xr-bg/40 px-4 py-3"
+                      className="flex items-center justify-between gap-3 rounded-control border border-xr-line bg-white px-4 py-3"
                     >
                       <div className="min-w-0">
-                        <p className="text-sm font-medium text-white">{store.name}</p>
+                        <p className="text-sm font-medium text-xr-text">{store.name}</p>
                         <p className="truncate text-xs text-xr-muted">{store.url}</p>
                       </div>
-                      <Button type="button" variant="ghost" size="sm" className="shrink-0 text-red-300 hover:bg-xr-danger/10" onClick={() => removeWooStore(store.id)}>
+                      <Button type="button" variant="ghost" size="sm" className="shrink-0 text-xr-danger hover:bg-xr-danger/10" onClick={() => removeWooStore(store.id)}>
                         Remove
                       </Button>
                     </div>
                   ))}
                 </div>
               )}
-              <div className="space-y-3 border-t border-white/5 pt-4">
+              <div className="space-y-3 border-t border-xr-line pt-4">
                 <p className="text-caption font-medium uppercase tracking-wider text-xr-muted">Add store</p>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <input className={inputCls} placeholder="Store name" value={wooForm.name} onChange={(e) => setWooForm((f) => ({ ...f, name: e.target.value }))} />
@@ -829,7 +828,7 @@ const SettingsScreen = ({ user, onLogout, onUserUpdate }) => {
                 <SlideToConfirm label="Slide to add store" onConfirm={addWooStore} loading={wooLoading} />
               </div>
               {wooStores.length > 0 && (
-                <div className="border-t border-white/5 pt-4">
+                <div className="border-t border-xr-line pt-4">
                   <SlideToConfirm label="Slide to sync orders" onConfirm={syncWooOrders} loading={syncLoading} />
                 </div>
               )}
